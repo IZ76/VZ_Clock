@@ -14,4 +14,4 @@
 Эти часы созданы и обновляются для простого использования. Бери и пользуйся той функцией, которая тебе нужна.
 Если возникают какие-то вопросы, то обсудить их можно на форуме http://forum.amperka.ru/threads/Часы-на-esp8266-и-max7219-android-управление.12767/
 
-[IMG]http://i.piccy.info/i9/9c3be255c235e51fca220f6601efc3ad/1586425927/46110/1367845/czasy_800.jpg[IMG]
+<a href="http://piccy.info/view3/13747467/f3bf92082a5bb356a659a9f7e70fb72e/1200/" target="_blank"><img src="http://i.piccy.info/i9/9c3be255c235e51fca220f6601efc3ad/1586425927/46110/1367845/czasy_800.jpg" alt="Piccy.info - Free Image Hosting" border="0" /></a><a href="http://i.piccy.info/a3c/2020-04-12-05-19/i9-13747467/800x318-r" target="_blank"><img src="http://i.piccy.info/a3/2020-04-12-05-19/i9-13747467/800x318-r/i.gif" alt="" border="0" /></a>
