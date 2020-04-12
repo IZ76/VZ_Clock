@@ -714,7 +714,7 @@ void loop() {
 //======================================================================================
 //==========ВИВІД НА ЕКРАН ТЕМПЕРАТУРИ В БУДИНКУ========================================
 void showSimpleTemp() {
-  if(WiFi.status()==WL_CONNECTED || (sensorHome>0&&sensorHome<6)) {
+  if(WiFi.status()==WL_CONNECTED || (sensorDom>0&&sensorDom<6)) {
     byte indent = aliData * (NUM_MAX0 - 4);
     dx = dy = 0;
     clr();
