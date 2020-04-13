@@ -132,6 +132,7 @@ bool loadConfig() {                                                // Заван
   sensors_ID2 = doc["sensors_ID2"];
   displayData = doc["displayData"];
   timeOutMqtt = doc["timeOutMqtt"];
+  butStat = doc["butStat"];
   if(printCom) {
     printTime();
     Serial.print("Load Config : ");
@@ -259,6 +260,7 @@ bool saveConfig() {
   doc["sensors_ID2"] = sensors_ID2;
   doc["displayData"] = displayData;
   doc["timeOutMqtt"] = timeOutMqtt;
+  doc["butStat"] = butStat;
   jsonConfig = "";
   if(serializeJson(doc, jsonConfig)==0){
     Serial.println(F("Failed to write to jsonConfig"));
