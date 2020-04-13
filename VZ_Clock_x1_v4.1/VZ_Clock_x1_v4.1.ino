@@ -496,8 +496,15 @@ void loop() {
   if (second != lastSecond) {                                                           // на початку нової секунди скидаємо secFr в "0"
     lastSecond = second;
     if (volBrightnessAuto) {
-      //levelBridhtness = map(analogRead(brightPin), 1023, 0, 0, 15);
-      levelBridhtness = map(analogRead(brightPin), upLivelBrightness, lowLivelBrightness, 0, 15);
+            int br = analogRead(brightPin);
+      if(lowLivelBrightness<=upLivelBrightness){
+        if(br<lowLivelBrightness) lowLivelBrightness=br;
+        if(br>upLivelBrightness) upLivelBrightness=br;
+      } else {
+        if(br<upLivelBrightness) upLivelBrightness=br;
+        if(br>lowLivelBrightness) lowLivelBrightness=br;
+      }
+      levelBridhtness = map(br,lowLivelBrightness, upLivelBrightness, 0, 15);
       sendCmdAll(CMD_INTENSITY, levelBridhtness);
     } else {
       if (hour >= timeDay && hour < timeNight) sendCmdAll(CMD_INTENSITY, volBrightnessD);
@@ -569,11 +576,6 @@ void loop() {
       if (second >= 10 && second < 15) {
         if(displayData == 1){
           showSimpleDate();
-        } else if(displayData == 2){
-          convertDw();
-          convertMonth();
-          date = "     " + dw + ", " + String(day) + " " + _month + " " + String(year) + "                ";
-          printStringWithShift(date.c_str(), timeScrollSpeed);
         } else showAnimClock();
       } else if (second >= 40 && second < 42 && sensorDom ) {
         showSimpleTemp();
@@ -617,8 +619,14 @@ void loop() {
     if (second == 10 && !alarm_stat && hour >= timeScrollStart && hour < timeScrollStop) {       // працує тілки в дозволений час
       if((timeDay<=timeNight?(hour>=timeDay && hour<=timeNight):(hour>=timeDay || hour<timeNight)) || !clockNight) {
         if (minute % 2 == 0 || !displayForecast) {                       // по чотним хвилинам виводимо повідомлення дати та курсу валют
-          if(displayData == 1) showSimpleDate();
-           else showAnimClock();
+          if(displayData == 1){
+            showSimpleDate();
+          } else if(displayData == 2){
+            convertDw();
+            convertMonth();
+            date = "     " + dw + ", " + String(day) + " " + _month + " " + String(year) + "                ";
+            printStringWithShift(date.c_str(), timeScrollSpeed);
+          } else showAnimClock();
         } else {                                                      // по не чотним хвилинам виводимо погоду
           printStringWithShift(weatherString.c_str(), timeScrollSpeed);
           printStringWithShift(weatherStringZ.c_str(), timeScrollSpeed);
@@ -761,7 +769,7 @@ void showSimpleTempU() {
 //==========ВИВІД НА ЕКРАН ДОДАТКОВИХ ДАННИХ========================================
 void showSimpleTempH() {
   if(WiFi.status() == WL_CONNECTED || (sensorHome>0&&sensorHome<6)) {
-    byte indent = (NUM_MAX0 * 8) - 32;
+    byte indent = aliData * (NUM_MAX0 - 4);
     dx = dy = 0;
     clr();
     showDigit((t6 < 0.0 ? 18 : 17), 0 + indent, znaki5x8); //друкуємо U+ альбо U-
