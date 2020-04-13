@@ -646,6 +646,7 @@ void handle_setup(){
   if(server.arg("corrHumi")!="") corrHumi = server.arg("corrHumi").toFloat();
   if(server.arg("corrPress")!="") corrPress = server.arg("corrPress").toInt();
   if(server.arg("displayData")!="") displayData = server.arg("displayData").toInt();
+  if(server.arg("butStat")!="") butStat = server.arg("butStat").toInt();
   if(printCom) {
     printTime();
     Serial.println("TBD: "+String(timeDay)+", VBD: "+String(volBrightnessD)+", TBN: "+String(timeNight)+", VBN: "+String(volBrightnessN)+",  kuOn: "+String(kuOn)+",  kuOff: "+String(kuOff)+", rotate: "+String(rotate0)+", clockNight: "+String(clockNight)+", buzzerSet: "+String(buzzerSet));
