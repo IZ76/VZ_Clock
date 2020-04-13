@@ -504,7 +504,7 @@ void loop() {
         if(br<upLivelBrightness) upLivelBrightness=br;
         if(br>lowLivelBrightness) lowLivelBrightness=br;
       }
-      levelBridhtness = map(br,lowLivelBrightness, upLivelBrightness, 0, 15);
+      levelBridhtness = map(br,lowLivelBrightness, upLivelBrightness, volBrightnessN, volBrightnessD);
       sendCmdAll(CMD_INTENSITY, levelBridhtness);
     } else {
       if (hour >= timeDay && hour < timeNight) sendCmdAll(CMD_INTENSITY, volBrightnessD);
