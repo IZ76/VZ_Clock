@@ -146,7 +146,7 @@ const char P_setup[] PROGMEM =  R"=====(
                     <br>
                     <table>
                          <tr>
-                            <td align = "right"><span class="opt_cn">Уровень с фоторезистора низ:</span></td>
+                            <td align = "right"><span class="opt_cn">Уровень c фоторезистора низ:</span></td>
                             <td><select id = "lowLivelBrightness">
                                 <option value = "0"> 0 </option>
                                 <option value = "68"> 1 </option>

@@ -690,15 +690,18 @@ void handle_mqtt_on() {
   if(mqttOn) reconnect();
   saveConfig(); 
   server.send(200, "text/plain", "OK");
-}//======================================================================================================
+}
+//======================================================================================================
 void handle_stopAlarm() {
   if(server.arg("stopAlarm")=="ok"){ 
-    stopAlarm = true;
-    if(printCom) {
-      printTime();
-      Serial.println("STOP ALARM");
+    if(alarm_stat){
+      stopAlarm = true;
+      if(printCom) {
+        printTime();
+        Serial.println("STOP ALARM");
+      }
+      bip();
     }
-    bip();
   }
   server.send(200, "text/plain", "OK");
 }

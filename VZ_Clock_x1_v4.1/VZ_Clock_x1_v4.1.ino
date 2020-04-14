@@ -370,9 +370,7 @@ void setup() {
   if (updateOTA) {
     ArduinoOTA.setPort(8266);
     ArduinoOTA.setHostname("ESP-ZAL");
-    ArduinoOTA.onEnd([]() {
-      ESP.restart();
-    });
+    ArduinoOTA.onEnd([](){ESP.restart();});
     ArduinoOTA.onError([](ota_error_t error) {
       Serial.printf("Error[%u]: ", error);
       if (error == OTA_AUTH_ERROR && printCom) Serial.println("Auth Failed");
@@ -496,7 +494,8 @@ void loop() {
   if (second != lastSecond) {                                                           // на початку нової секунди скидаємо secFr в "0"
     lastSecond = second;
     if (volBrightnessAuto) {
-            int br = analogRead(brightPin);
+      //levelBridhtness = map(analogRead(brightPin), 1023, 0, 0, 15);
+      int br = analogRead(brightPin);
       if(lowLivelBrightness<=upLivelBrightness){
         if(br<lowLivelBrightness) lowLivelBrightness=br;
         if(br>upLivelBrightness) upLivelBrightness=br;
@@ -573,8 +572,10 @@ void loop() {
   // ---------- ВИВІД НА ЕКРАН ГОДИННИКА АБО ТЕМПЕРАТУРИ ЧИ ВОЛОГОСТІ------------------------
   if (!alarm_stat && millis() % 50 == 0) {
     if ((clockNight && (timeDay<=timeNight?(hour>=timeDay && hour<=timeNight):(hour>=timeDay || hour<timeNight))) || !clockNight) {
-      if (second >= 10 && second < 15) {
-        if(displayData != 0){
+      if (second >= 10 && second < 15 && hour <timeScrollStart && hour >= timeScrollStop) {
+        if(displayData == 1){
+          showSimpleDate();
+        } else if(displayData == 2 && hour <timeScrollStart && hour >= timeScrollStop){
           showSimpleDate();
         } else showAnimClock();
       } else if (second >= 40 && second < 42 && sensorDom ) {
@@ -615,7 +616,7 @@ void loop() {
         }
       }
     }
-    // ---------- 10 секунда - виводимо дату/погоду----------------------------------------------------------
+    // ---------- 10 секунда /погоду----------------------------------------------------------
     if (second == 10 && !alarm_stat && hour >= timeScrollStart && hour < timeScrollStop) {       // працує тілки в дозволений час
       if((timeDay<=timeNight?(hour>=timeDay && hour<=timeNight):(hour>=timeDay || hour<timeNight)) || !clockNight) {
         if (minute % 2 == 0 || !displayForecast) {                       // по чотним хвилинам виводимо повідомлення дати та курсу валют
@@ -717,6 +718,10 @@ void loop() {
   // ---------- якщо мережа WiFi доступна то виконуємо наступні функції ----------------------------
   if (WIFI_connected) {
     if (mqttOn) MQTTclient.loop();          // перевіряємо чи намає вхідних повідомлень, як є, то кoлбек функція
+  }
+  if(secFr==0 && butMode != 0){ // если отработали все функции работы с кнопкой, то состояние сбросится автоматом
+    Serial.println("BUT MODE RESET");
+    butMode = 0;
   }
 }
 //======================================================================================
@@ -1809,7 +1814,11 @@ void wifiConnect() {
       Serial.println(WiFi.softAPIP());
     }
     updateTime();
-    printStringWithShift(tPoint.c_str(), 35);
+    String aaa = tPoint + " " + ssidAP;
+    if(passwordAP != "") aaa += ",  " + tPass + ": " + passwordAP;
+    aaa += ",  " + tIp + ": 192.168.4.1";
+    clr();
+    printStringWithShift(aaa.c_str(), 35);
     //firstStart=1;
   }
 }

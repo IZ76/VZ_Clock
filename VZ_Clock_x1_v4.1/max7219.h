@@ -28,6 +28,7 @@ void refreshAll() {
   byte mask = (rotate0 == 270? 0x01 : 0x80);
   for(int c = 0; c < 8; c++){
     digitalWrite(CS_PIN, LOW);
+    //for(int i = NUM_MAX0 - 1; i >=0; i--) {
     for(int i = (rotate0 == 180?0:NUM_MAX0-1); (rotate0 == 180?(i<NUM_MAX0):(i>=0)); (rotate0 == 180?i++:i--)){
       byte bt = 0;
       if(rotate0 == 270) {
