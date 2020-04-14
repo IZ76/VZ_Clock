@@ -572,7 +572,7 @@ void loop() {
   // ---------- ВИВІД НА ЕКРАН ГОДИННИКА АБО ТЕМПЕРАТУРИ ЧИ ВОЛОГОСТІ------------------------
   if (!alarm_stat && millis() % 50 == 0) {
     if ((clockNight && (timeDay<=timeNight?(hour>=timeDay && hour<=timeNight):(hour>=timeDay || hour<timeNight))) || !clockNight) {
-      if (second >= 10 && second < 15 && hour <timeScrollStart && hour >= timeScrollStop) {
+      if (second >= 10 && second < 15) {
         if(displayData == 1){
           showSimpleDate();
         } else if(displayData == 2 && hour <timeScrollStart && hour >= timeScrollStop){
