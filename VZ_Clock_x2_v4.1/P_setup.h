@@ -19,7 +19,7 @@ const char P_setup[] PROGMEM =  R"=====(
     </head>
     <body onload = "load_setup();">
         <header>
-            <span class="opt_cn">ЧЧасы информер VZ_Clock_x2_v4.1 (by IvanZah)</span><br>
+            <span class="opt_cn">Часы информер VZ_Clock_x2_v4.1 (by IvanZah)</span><br>
             <span class="opt_cn">Время на ESP:</span>
             <span id="time">{{time}}</span> 
         </header>       
