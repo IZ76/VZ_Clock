@@ -343,7 +343,7 @@ const char P_setup[] PROGMEM =  R"=====(
                               <option value = "MQTT2"> MQTT2 </option>
                               <option value = "MQTT3"> MQTT3 </option>
                             </select></td>
-                            <td><input type="text" class="field form-control" id="corrTempD" value="{{corrTempD}}" pattern="\- \d+(\.\d{2})?"></td>
+                            <td><input type="number" class="field form-control" id="corrTempD" value="{{corrTempD}}" step="0.01" min="-99" max="99"></td>
                             <td><span class="opt_cn"> {{Td}} </span></td>
                         </tr>
                         <tr>
@@ -360,7 +360,7 @@ const char P_setup[] PROGMEM =  R"=====(
                               <option value = "MQTT3"> MQTT3 </option>
                               <option value = "NMon"> NMon </option>
                             </select></td>
-                            <td><input type="text" class="field form-control" id="corrTempU" value="{{corrTempU}}" pattern="\- \d+(\.\d{2})?"></td>
+                            <td><input type="number" class="field form-control" id="corrTempU" value="{{corrTempU}}" step="0.01" min="-99" max="99"></td>
                             <td><span class="opt_cn"> {{Tu}} </span></td>
                         </tr>
                         <tr>
@@ -377,7 +377,7 @@ const char P_setup[] PROGMEM =  R"=====(
                               <option value = "MQTT3"> MQTT3 </option>
                               <option value = "NMon"> NMon </option>
                             </select></td>
-                            <td><input type="text" class="field form-control" id="corrTempH" value="{{corrTempH}}" pattern="\- \d+(\.\d{2})?"></td>
+                            <td><input type="number" class="field form-control" id="corrTempH" value="{{corrTempH}}" step="0.01" min="-99" max="99"></td>
                             <td><span class="opt_cn"> {{Th}} </span></td>
                         </tr>
                         <tr>
@@ -388,7 +388,7 @@ const char P_setup[] PROGMEM =  R"=====(
                               <option value = "BME280"> BME280 </option>
                               <option value = "DHT"> DHT11/22.... </option>
                             </select></td>
-                            <td><input type="text" class="field form-control" id="corrHumi" value="{{corrHumi}}" pattern="\- \d+(\.\d{2})?"></td>
+                            <td><input type="number" class="field form-control" id="corrHumi" value="{{corrHumi}}" step="0.01" min="-99" max="99"></td>
                             <td><span class="opt_cn"> {{Hd}} </span></td>
                         </tr>
                         <tr>
@@ -398,7 +398,7 @@ const char P_setup[] PROGMEM =  R"=====(
                               <option value = "BMP280"> BMP180/280 </option>
                               <option value = "BME280"> BME280 </option>
                             </select></td>
-                            <td><input type="text" class="field form-control" id="corrPress" value="{{corrPress}}" pattern="\- [0-9]{0,3}"></td>
+                            <td><input type="number" class="field form-control" id="corrPress" value="{{corrPress}}" step="0.01" min="-99" max="99"></td>
                             <td><span class="opt_cn"> {{Pu}} </span></td>
                         </tr>
                         <tr>
