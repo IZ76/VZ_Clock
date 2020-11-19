@@ -160,17 +160,6 @@ byte statThing1 = 1;
 byte statThing2 = 2;
 byte statThing3 = 3;
 byte statThing4 = 7;
-
-String oldcreatedat = "";
-unsigned long counterThink = 0;
-bool humThinkOnOff = true;
-
-float tempThink = 0.0; //температура с ThingSpeak со знаком и плавающей запятой
-float humThink = 0.0; // влажность на улице с ThingSpeak со знаком и плавающей запятой
-byte hT1 = 0;    // влажность на улице с ThingSpeak целая беззнаковая часть
-byte hT2 = 0;    // влажность на улице с ThingSpeak дробная беззнаковая часть
-float pressThink = 0.0; // джавление с ThingSpeak со знаком и плавающей запятой
-float batThink = 0.0; // Заряд АКБ с ThingSpeak со знаком и плавающей запятой
 // =====================================================================================
 bool printCom = true;
 #define MAX_DIGITS 16
