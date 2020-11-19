@@ -449,7 +449,7 @@ void handle_ConfigSetupJson() {
   json += "\",\"corr00\":\"";
   json += corr00;
   float Td=data00;
-  if(param0=20){
+  if(param0==20){
     if(pressSys==1 && Td>815) Td /= 1.3332239;
     if(pressSys!=1 && Td<815) Td /= 0.7500615613026439;
   }
@@ -460,7 +460,7 @@ void handle_ConfigSetupJson() {
   json += "\",\"corr01\":\"";
   json += corr01;
   float Tu=data01;
-  if(param1=20){
+  if(param1==20){
     if(pressSys==1 && Tu>815) Tu /= 1.3332239;
     if(pressSys!=1 && Tu<815) Tu /= 0.7500615613026439;
   }
@@ -471,7 +471,7 @@ void handle_ConfigSetupJson() {
   json += "\",\"corr02\":\"";
   json += corr02;
   float Th=data02;
-  if(param2=20){
+  if(param2==20){
     if(pressSys==1 && Th>815) Th /= 1.3332239;
     if(pressSys!=1 && Th<815) Th /= 0.7500615613026439;
   }
@@ -482,7 +482,7 @@ void handle_ConfigSetupJson() {
   json += "\",\"corr03\":\"";
   json += corr03;
   float Hd=data03;
-  if(param3=20){
+  if(param3==20){
     if(pressSys==1 && Hd>815) Hd /= 1.3332239;
     if(pressSys!=1 && Hd<815) Hd /= 0.7500615613026439;
   }
@@ -493,7 +493,7 @@ void handle_ConfigSetupJson() {
   json += "\",\"corr04\":\"";
   json += corr04;
   float Pu=data04;
-  if(param4=20){
+  if(param4==20){
     if(pressSys==1 && Pu>815) Pu /= 1.3332239;
     if(pressSys!=1 && Pu<815) Pu /= 0.7500615613026439;
   }
