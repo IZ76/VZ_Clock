@@ -2109,34 +2109,41 @@ void getNarodmon(){
     }
     return;
   }
+  long sensors_time[3];
+  float value[3];
+  int sensors_id[3];
   JsonObject sensors_0 = doc["sensors"][0];
-  nMon00 = sensors_0["value"]; // 14.2
-  long sensors_0_time = sensors_0["time"]; // 1571853360
+  sensors_id[0] = sensors_0["id"];
+  value[0] = sensors_0["value"]; // 14.2
+  sensors_time[0] = sensors_0["time"]; // 1571853360
   JsonObject sensors_1 = doc["sensors"][1];
-  nMon01 = sensors_1["value"]; // 14
-  long sensors_1_time = sensors_1["time"]; // 1571853000
+  sensors_id[2] = sensors_0["id"];
+  value[1] = sensors_1["value"]; // 14
+  sensors_time[1] = sensors_1["time"]; // 1571853000
   JsonObject sensors_2 = doc["sensors"][2];
-  nMon02 = sensors_2["value"];
-  long sensors_2_time = sensors_2["time"];
+  sensors_id[3] = sensors_0["id"];
+  value[2] = sensors_2["value"];
+  sensors_time[2] = sensors_2["time"];
   
   long timestamp = epochNM + (millis()/1000);
 
-  if(sensors_ID0){
-    if((timestamp-sensors_0_time)>3600){
-      nMon00=999;
+  for(byte i=0;i<3;i++){
+    if(sensors_ID0 && sensors_id[i]==sensors_ID0){
+      if((timestamp-sensors_time[i])>3600){
+        nMon00=999;
+      } else nMon00=value[i];
+    }
+    if(sensors_ID1 && sensors_id[i]==sensors_ID1){
+      if((timestamp-sensors_time[i])>3600){
+        nMon01=999;
+      } else nMon01=value[i];
+    }
+    if(sensors_ID2 && sensors_id[i]==sensors_ID2){
+      if((timestamp-sensors_time[i])>3600){
+        nMon02=999;
+      } else nMon02=value[i];
     }
   }
-  if(sensors_ID1){
-    if((timestamp-sensors_1_time)>3600) {
-      nMon01=999;
-    }
-  }
-  if(sensors_ID2){
-    if((timestamp-sensors_2_time)>3600){
-      nMon02=999;
-    }
-  }
-  if(!nMon01&&!updateForecast) nMon01=location_temp;
   if(printCom) {
     printTime();
     Serial.println("line =" + line);
