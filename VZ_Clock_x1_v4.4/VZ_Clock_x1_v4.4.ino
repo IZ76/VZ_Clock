@@ -2117,11 +2117,11 @@ void getNarodmon(){
   value[0] = sensors_0["value"]; // 14.2
   sensors_time[0] = sensors_0["time"]; // 1571853360
   JsonObject sensors_1 = doc["sensors"][1];
-  sensors_id[2] = sensors_0["id"];
+  sensors_id[1] = sensors_1["id"];
   value[1] = sensors_1["value"]; // 14
   sensors_time[1] = sensors_1["time"]; // 1571853000
   JsonObject sensors_2 = doc["sensors"][2];
-  sensors_id[3] = sensors_0["id"];
+  sensors_id[2] = sensors_2["id"];
   value[2] = sensors_2["value"];
   sensors_time[2] = sensors_2["time"];
   
