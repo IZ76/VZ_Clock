@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/manage.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Глобальные настройки устройства</span>
+                </titles>
+				<table class="table_info">
+                    <tr><td><div>Тип памяти:</div></td><td><div id="type">---</div></td></tr>
+                    <tr><td><div>Состояние:</div></td><td><div id="isOk">---<div></td></tr>
+                    <tr><td><div>Всего  памяти:</div></td><td><div id="totalBytes">---</div></td></tr>
+                    <tr><td><div>Занято памяти:</div></td><td><div id="usedBytes">---</div></td></tr>
+                </table>
+				<br>
+                <span class="paragraph">Управление файлами настроек:</span>
+                <table class="table">
+                    <tr>
+                        <td>Выберите область настройки:</td>
+                        <td><select id="num_memory">
+                            <option value="0">НЕТ</option>
+							<option value="1">Wifi</option>
+                            <option value="2">Wifi избранное</option>
+                            <option value="3">Время</option>
+                            <option value="4">Погода</option>
+                            <option value="5">Экран</option>
+                            <option value="6">Сервисы</option>
+                            <option value="7">MQTT</option>
+                            <option value="8">Thing</option>
+                            <option value="9">Narod</option>
+                            <option value="10">SGP30</option>
+							<option value="11">IR</option>
+                            <option value="12">ВСЕ</option>
+                         </select></td>
+                    </tr>
+                </table>
+                <br>
+                <span class="save_booton" onclick="saveConfig();">Сохранить настройку</span>
+                <span class="save_booton" onclick="resetConfig(this,'Сброс настроек по умолчанию не обратим! Выполнить?');">Сбросить настройку</span>
+                <br>
+                <table class="table">
+                    <tr>
+                        <td><input id="loadF" class="but_add" type="file" value="Выберите файл для загрузки" name="data"/></td>
+                    </tr>
+                </table>
+                <br>
+                <span class="save_booton" onclick="loadConfig();">Загрузить настройку</span>
+                <br>
+                <br>                
+                <span class="save_booton" onclick="get_html('fsbrowser.html');">FS_Browser</span>
+                <br>
+                <br>
+                <span class="save_booton" onclick="restart(this,'Перезагрузить ESP?');">Перезагрузить устройство</span>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <div>
+                    <b><span>Обновление: выберите и загрузите прошивку (bin)</span></b>
+                    <form method="POST" action="/update" enctype="multipart/form-data">
+                        <div>
+                            <input type="file"  name="update" style="height: 33px;">
+                            <input type="submit" class="save_booton" value="загрузить" onclick="this.value='Ждите...';">
+                        </div>
+                    </form>
+                </div>  
+                <br>
+                <hr>
+                <br>
+            </center>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

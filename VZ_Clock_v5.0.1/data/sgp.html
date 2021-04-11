@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/sgp.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройки SGP30</span>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                    <span class="paragraph">Настройка параметров eCO₂:</span>
+                    <div class="informer">
+                        <span><b>SGP30 измеряет два параметра: TVOC и eCO₂.</b></span>
+                        <span>eCO₂ - эквивалент диоксида углерода СО₂-экв: единица, используемая для сравнения излучающей способности парниковых газов с диоксидом углерода.</span>
+                        <a href="http://piccy.info/view3/13864970/061d0af592b2841b0ffbcc8a04a5153a/" target="_blank"><img src="http://i.piccy.info/i9/c88497dcdc24329655424209daa90a32/1592663986/27636/1367845/eCO2_500.jpg" width="440" alt="Картинка из интернета" border="0" /></a><a href="http://i.piccy.info/a3c/2020-06-20-14-39/i9-13864970/500x326-r" target="_blank"><img src="http://i.piccy.info/a3/2020-06-20-14-39/i9-13864970/500x326-r/i.gif" alt="" border="0" /></a>
+                    </div>
+                    <br>
+                    <span>Текущий уровень eCO₂:&ensp;<b></span>
+                    <span id="sgpCo2"></span>
+                    <span>ppm</b></span>
+                    <br>
+                    <span>(</span>
+                    <span id="textCo2"></span>
+                    <span>)</span>
+                    <br>
+                    <br>
+                    <div class="informer">
+                        <span>Уровни оповещения eCO₂: <b>0</b>=(400-699), <b>1</b>=(700-999), <b>2</b>=(1000-2499), <b>3</b>=(2500-4999), <b>4</b>=(5000++)</span>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>Установить уровень оповещения:</td>
+                            <td><select id="sgpCo2LivelAlarm">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать уровень eCO₂ на экране:</td>
+                            <td><input type="checkbox" id="eCo2Led"/></td>
+                        </tr>
+                        <tr>
+                            <td>Выводить Alarm оповещение на экран:</td>
+                            <td><input type="checkbox" id="eCo2AlarmEsp"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отправлять Alarm в информ топик MQTT:</td>
+                            <td><input type="checkbox" id="eCo2AlarmMqtt"/></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Настройка параметров TVOC:</span>
+                    <div class="informer">
+                        <span>TVOC - совокупные летучие органические соединения. В некоторых случаях измерение одного только CO₂ не показывает превышения VOC.</span>
+                        <a href="http://piccy.info/view3/13865133/19c9f4eb269e095f2168eff76ded6f61/" target="_blank"><img src="http://i.piccy.info/i9/7a041b5e7861475556d28c9faa6e61d2/1592670426/8368/1367845/iAQ_core_AMS_2.png" width="440" alt="Картинка из интернета" border="0" /></a><a href="http://i.piccy.info/a3c/2020-06-20-16-27/i9-13865133/500x235-r" target="_blank"><img src="http://i.piccy.info/a3/2020-06-20-16-27/i9-13865133/500x235-r/i.gif" alt="" border="0" /></a>
+                    </div>
+                    <br>
+                    <span>Текущий уровень TVOC:&ensp;<b></span>
+                    <span id="sgpTvoc"></span>
+                    <span>ppm</b></span>
+                    <br>
+                    <span>(</span>
+                    <span id="textTvoc"></span>
+                    <span>)</span>
+                    <br>
+                    <br>
+                    <div class="informer">
+                        <span>Уровни оповещения TVCO:  <b>0</b>=(0-64),  <b>1</b>=(65-219), <b>2</b>=(220-659), <b>3</b>=(660-2199), <b>4</b>=(2200++)</span>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>Установить уровень оповещения:</td>
+                            <td><select id="sgpTvocLivelAlarm">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать уровень TVOC на экране:</td>
+                            <td><input type="checkbox" id="tvocLed"/></td>
+                        </tr>
+                        <tr>
+                            <td>Выводить Alarm оповещение на экран:</td>
+                            <td><input type="checkbox" id="tvocAlarmEsp"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отправлять Alarm в информ топик MQTT:</td>
+                            <td><input type="checkbox" id="tvocAlarmMqtt"/></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Настройка коррекци данных SGP30:</span>
+                    <div class="informer">
+                        <span>Во избежание ошибок измерения необходимо указать датчику текущую абсолютную влажность воздуха, которая будет учтена при расчёте концентрации. Для этого, в паре с SGP30, рекомендуется использовать датчик влажности/температуры.</span>
+                    </div>
+                    <select id="setSgpCorr">
+                        <option value="0"> Не учитывать </option>
+                        <option value="1" id="BME" style="display: none;"> BME280 </option>
+                        <option value="2" id="SI"  style="display: none;"> Si7021 </option>
+                        <option value="3" id="AHT" style="display: none;"> AHTx0 </option>
+                        <option value="4" id="DHT" style="display: none;"> DHT11/22 </option>
+                        <option value="99"> Ручной ввод </option>
+                    </select>
+                    <br>
+                    <br>
+                    <span>Данные для ручного ввода:</span>
+                    <br>
+                    <table class="table">
+                        <tr>
+                            <td>Коррекция температуры (°С):</td>
+                            <td><input type="number" class="inputS" id="sgpCorrTemp" min="-9999" max="99999" step="0.01"/></td>
+                        </tr>
+                        <tr>
+                            <td>Коррекция влажности (%):</td>
+                            <td><input type="number"class="inputS" id="sgpCorrHumi" min="-9999" max="99999" step="0.01"/></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>   
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

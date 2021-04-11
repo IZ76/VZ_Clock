@@ -1,0 +1,639 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/sens.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройка сервисов устройства</span>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                    <span class="paragraph">Внешние сервисы:</span>
+                    <table class="sens_ck">
+                        <tr>
+                            <td>Использовать MQTT сервис:</td>
+                            <td><input type="checkbox" id="mqttOn"/></td>
+                            <td><input class="but_add" type="button" value="настройка" onclick="get_html('mqtt.html');"/></td>
+                        </tr>
+                        <tr>
+                            <td>Использовать thingspeak.com:</td>
+                            <td><input type="checkbox" id="thingOn"/></td>
+                            <td><input class="but_add" type="button" value="настройка" onclick="get_html('thing.html');"/></td>
+                        </tr>
+                        <tr>
+                            <td>Использовать narodmon.ru:</td>
+                            <td><input type="checkbox" id="nmonOn"/></td>
+                            <td><input class="but_add" type="button" value="настройка" onclick="get_html('nmon.html');"/></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Локальные датчики:</span>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b>Имя</b></span></td>
+                            <td><span><b>Символ</b></span></td>
+                            <td><span><b>Датчик</b></span></td>
+                            <td><span><b>Коррекция</b></span></td>
+                            <td><span><b>Данные</b></span></td>
+                        </tr>
+                        <tr>
+                            <td>D1</td>
+                            <td><select id="params0">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors0">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_0" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_0" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_0" style="display: none;">BME280</option>
+                              <option value="2" id="SI_0" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_0" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_0" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_0_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_0_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_0_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_0_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_0_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_0_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_0_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_0_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_0_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_0_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_0_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_0_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_0_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_0_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_0_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_0_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_0_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_0_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_0_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_0_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_0_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_0_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_0_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_0_7" style="display: none;">NMon 8</option>
+                            </select></td>
+                            <td><input id="corr0" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol00"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D2</td>
+                            <td><select id="params1">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors1">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_1" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_1" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_1" style="display: none;">BME280</option>
+                              <option value="2" id="SI_1" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_1" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_1" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_1_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_1_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_1_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_1_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_1_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_1_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_1_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_1_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_1_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_1_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_1_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_1_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_1_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_1_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_1_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_1_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_1_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_1_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_1_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_1_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_1_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_1_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_1_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_1_7" style="display: none;">NMon 8</option>
+                            </select></td>
+                            <td><input id="corr1" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol01"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D3</td>
+                            <td><select id="params2">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors2">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_2" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_2" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_2" style="display: none;">BME280</option>
+                              <option value="2" id="SI_2" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_2" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_2" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_2_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_2_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_2_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_2_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_2_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_2_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_2_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_2_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_2_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_2_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_2_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_2_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_2_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_2_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_2_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_2_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_2_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_2_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_2_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_2_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_2_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_2_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_2_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_2_7" style="display: none;">NMon 8</option>
+                            </select></td>
+                            <td><input id="corr2" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol02"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D4</td>
+                            <td><select id="params3">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors3">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_3" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_3" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_3" style="display: none;">BME280</option>
+                              <option value="2" id="SI_3" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_3" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_3" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_3_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_3_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_3_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_3_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_3_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_3_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_3_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_3_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_3_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_3_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_3_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_3_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_3_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_3_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_3_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_3_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_3_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_3_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_3_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_3_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_3_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_3_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_3_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_3_7" style="display: none;">NMon 8</option>
+                            </select></td>
+                            <td><input id="corr3" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol03"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D5</td>
+                            <td><select id="params4">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors4">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_4" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_4" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_4" style="display: none;">BME280</option>
+                              <option value="2" id="SI_4" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_4" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_4" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_4_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_4_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_4_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_4_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_4_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_4_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_4_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_4_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_4_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_4_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_4_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_4_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_4_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_4_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_4_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_4_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_4_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_4_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_4_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_4_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_4_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_4_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_4_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_4_7" style="display: none;">NMon 8</option>
+                            </select></td>
+                            <td><input id="corr4" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol04"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D6</td>
+                            <td><select id="params5">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors5">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_5" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_5" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_5" style="display: none;">BME280</option>
+                              <option value="2" id="SI_5" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_5" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_5" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_5_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_5_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_5_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_5_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_5_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_5_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_5_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_5_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_5_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_5_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_5_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_5_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_5_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_5_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_5_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_5_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_5_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_5_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_5_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_5_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_5_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_5_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_5_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_5_7" style="display: none;">NMon 8</option>
+                            </select></td>
+                            <td><input id="corr5" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol05"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D7</td>
+                            <td><select id="params6">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors6">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_6" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_6" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_6" style="display: none;">BME280</option>
+                              <option value="2" id="SI_6" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_6" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_6" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_6_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_6_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_6_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_6_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_6_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_6_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_6_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_6_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_6_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_6_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_6_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_6_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_6_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_6_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_6_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_6_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_6_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_6_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_6_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_6_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_6_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_6_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_6_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_6_7" style="display: none;">NMon 8</option>
+                              <option value="99">  </option>
+                            </select></td>
+                            <td><input id="corr6" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol06"></span></td>
+                        </tr>
+                        <tr>
+                            <td>D8</td>
+                            <td><select id="params7">
+                              <option value="0">tD</option>
+                              <option value="1">tU</option>
+                              <option value="2">tH</option>
+                              <option value="3">tT</option>
+                              <option value="4">tL</option>
+                              <option value="10">h</option>
+                              <option value="11">h1</option>
+                              <option value="12">h2</option>
+                              <option value="13">h3</option>
+                              <option value="14">h4</option>
+                              <option value="20">P</option>
+                              <option value="21">C</option>
+                              <option value="22">V</option>
+                              <option value="23">A</option>
+                            </select></td>
+                            <td><select id="sensors7">
+                              <option value="0">НЕТ</option>
+                              <option value="1" id="DS_7" style="display: none;">DS18B20</option>
+                              <option value="3" id="BMP_7" style="display: none;">BMP180/280</option>
+                              <option value="4" id="BME_7" style="display: none;">BME280</option>
+                              <option value="2" id="SI_7" style="display: none;">SI7021</option>
+                              <option value="10" id="AHT_7" style="display: none;">AHTx0</option>
+                              <option value="5" id="DHT_7" style="display: none;">DHT11/22</option>
+                              <option value="11" id="MQ_7_0" style="display: none;">MQTT 1</option>
+                              <option value="12" id="MQ_7_1" style="display: none;">MQTT 2</option>
+                              <option value="13" id="MQ_7_2" style="display: none;">MQTT 3</option>
+                              <option value="14" id="MQ_7_3" style="display: none;">MQTT 4</option>
+                              <option value="15" id="MQ_7_4" style="display: none;">MQTT 5</option>
+                              <option value="16" id="MQ_7_5" style="display: none;">MQTT 6</option>
+                              <option value="17" id="MQ_7_6" style="display: none;">MQTT 7</option>
+                              <option value="18" id="MQ_7_7" style="display: none;">MQTT 8</option>
+                              <option value="21" id="TH_7_0" style="display: none;">THING 1</option>
+                              <option value="22" id="TH_7_1" style="display: none;">THING 2</option>
+                              <option value="23" id="TH_7_2" style="display: none;">THING 3</option>
+                              <option value="24" id="TH_7_3" style="display: none;">THING 4</option>
+                              <option value="25" id="TH_7_4" style="display: none;">THING 5</option>
+                              <option value="26" id="TH_7_5" style="display: none;">THING 6</option>
+                              <option value="27" id="TH_7_6" style="display: none;">THING 7</option>
+                              <option value="28" id="TH_7_7" style="display: none;">THING 8</option>
+                              <option value="31" id="NM_7_0" style="display: none;">NMon 1</option>
+                              <option value="32" id="NM_7_1" style="display: none;">NMon 2</option>
+                              <option value="33" id="NM_7_2" style="display: none;">NMon 3</option>
+                              <option value="34" id="NM_7_3" style="display: none;">NMon 4</option>
+                              <option value="35" id="NM_7_4" style="display: none;">NMon 5</option>
+                              <option value="36" id="NM_7_5" style="display: none;">NMon 6</option>
+                              <option value="37" id="NM_7_6" style="display: none;">NMon 7</option>
+                              <option value="38" id="NM_7_7" style="display: none;">NMon 8</option>
+                              <option value="99">  </option>
+                            </select></td>
+                            <td><input id="corr7" class="inputShort" type="number" min="-9999" max="99999" step="0.01"/></td>
+                            <td><span id="vol07"></span></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Настройка оборудования</span>
+                    <table class="sens_ck">
+                        <tr>
+                            <td>Использовать сенсор SGP30:</td>
+                            <td><input type="checkbox" id="sgpOn"/></td>
+                            <td><input class="but_add" type="button" value="настройка" onclick="get_html('sgp.html');"/></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <td>Выводить информацию в COM порт:</td>
+                            <td><input type="checkbox" id="printCom"/></td>
+                        </tr>
+						<tr>
+                            <td>Использовать ОТА для прошивки:</td>
+                            <td><input type="checkbox" id="updateOTA"/></td>
+                        </tr>
+                        <tr>
+                            <td>Сигнал при сохранении:</td>
+                            <td><input type="checkbox" id="beepSave"/></td>
+                        </tr>
+                        <tr>
+                            <td>Кнопка подключена к GPIO16(D0) и к:</td>
+                            <td><select id="butStat">
+                                <option value="0">-5В</option>
+                                <option value="1">+5В</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Единицы измерения давления:</td>
+                            <td><select id="pressSys">
+                              <option value="0">гПа</option>
+                              <option value="1">мм.рс.</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Использовать зуммер:</td>
+                            <td><select id="buzzerSet">
+                                <option value="0">Не использовать</option>
+                                <option value="1">Активный</option>
+                                <option value="2">Пассивный</option>
+                             </select></td>
+                        </tr>
+                        <tr>
+                            <td>Язык сообщений:</td>
+                            <td><select id="messLang">
+                                <option value="en">English</option>
+                                <option value="uk">Українська</option>
+                                <option value="ru">Русский</option>
+                                <option value="de">Deutsch</option>
+                                <option value="pl">Polski</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Сигнал в начале каждого часа с:</td>
+                            <td><select id="kuOn">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select></td>
+                            <td>до:</td>
+                            <td><select id="kuOff">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">полуночи</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        </tr>
+                            <td><input class="but_add" type="button" value="Настройка ИК пульта" onclick="get_html('ir.html');"/></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                    <br>
+                    <br>
+                    <hr>
+                    <br>
+                    <span class="save_booton" onclick="get_html('manage.html');">Глобальные настройки устройства</span>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

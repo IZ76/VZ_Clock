@@ -1,0 +1,332 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/thing.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройки ThingSpeak</span>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                    <span class="paragraph">Параметры отправки данных:</span>
+                    <table class="table">
+                        <tr>
+                            <td>Channel ID:</td>
+                            <td><input type="text" class="inputS" id="channelIdWrite" maxlength="30"/></td>
+                        </tr>
+                        <tr>
+                            <td>Write API Key:</td>
+                            <td><input type="password" class="inputS" id="writeApiKey" maxlength="30"/><input type="checkbox" class="togleye"  onclick="sh_sendWrApi(this);"/></td>
+                        </tr>
+                        <tr>
+                            <td>Read API Keys:</td>
+                            <td><input type="password" class="inputS" id="wrApiKey" maxlength="30"/><input type="checkbox" class="togleye"  onclick="sh_sendRdApi(this);"/></td>
+                        </tr>
+                        <tr>
+                            <td>Channel Name:</td>
+                            <td><span id="nameWriteChannel">---</span></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b> Field </b></span></td>
+                            <td><span><b> Имя/Статус</b></span></td>
+                            <td><span><b> Данные </b></span></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><span id="nameField0"></span></td>
+                            <td><select id="writeFild0">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span id="nameField1"></span></td>
+                            <td><select id="writeFild1">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><span id="nameField2"></span></td>
+                            <td><select id="writeFild2">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><span id="nameField3"></span></td>
+                            <td><select id="writeFild3">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><span id="nameField4"></span></td>
+                            <td><select id="writeFild4">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><span id="nameField5"></span></td>
+                            <td><select id="writeFild5">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><span id="nameField6"></span></td>
+                            <td><select id="writeFild6">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><span id="nameField7"></span></td>
+                            <td><select id="writeFild7">
+                                <option value="0">НЕТ</option>
+                                <option value="1">Датчик 1</option>
+                                <option value="2">Датчик 2</option>
+                                <option value="3">Датчик 3</option>
+                                <option value="4">Датчик 4</option>
+                                <option value="5">Датчик 5</option>
+                                <option value="6">Датчик 6</option>
+                                <option value="7">Датчик 7</option>
+                                <option value="8">Датчик 8</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Параметры получения данных:</span>
+                    <table class="table">
+                        <tr>
+                            <td>Channel ID:</td>
+                            <td><input type="text" class="inputS" id="channelIdRead" maxlength="30"/></td>
+                        </tr>
+                        <tr>
+                            <td>Read API Keys:</td>
+                            <td><input type="password" class="inputS" id="readApiKey" maxlength="30"/><input type="checkbox" class="togleye"  onclick="sh_getRdApi(this);"/></td>
+                        </tr>
+                        <tr>
+                            <td>Channel Name:</td>
+                            <td><span id="nameReadChannel">---</span></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b> Переменная</b></span></td>
+                            <td><span><b> Имя(номер) </b></span></td>
+                        </tr>
+                        <tr>
+                            <td>THING 1</td>
+                            <td><select id="statThing0">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 2</td>
+                            <td><select id="statThing1">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 3</td>
+                            <td><select id="statThing2">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 4</td>
+                            <td><select id="statThing3">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 5</td>
+                            <td><select id="statThing4">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 6</td>
+                            <td><select id="statThing5">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 7</td>
+                            <td><select id="statThing6">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>THING 8</td>
+                            <td><select id="statThing7">
+                                <option value="0"> Не использовать </option>
+                                <option value="1">{{nameReadField0}} (1)</span></option>
+                                <option value="2">{{nameReadField1}} (2)</span></option>
+                                <option value="3">{{nameReadField2}} (3)</span></option>
+                                <option value="4">{{nameReadField3}} (4)</span></option>
+                                <option value="5">{{nameReadField4}} (5)</span></option>
+                                <option value="6">{{nameReadField5}} (6)</span></option>
+                                <option value="7">{{nameReadField6}} (7)</span></option>
+                                <option value="8">{{nameReadField7}} (8)</span></option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>   
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/ir.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройка инфракрасного пульта</span>
+                </titles>
+                <div class="informer">
+                    <span><b>&emsp; Красная -</b> Стоп будильник/напоминания</span>
+                    <br>
+                    <span><b>&emsp;&emsp;&ensp; Зеленая -</b> Выводит датчики на экран</span>
+                    <br>
+                    <span><b>&emsp;&emsp;&ensp; Синяя -</b> Выводит погоду на экран</span>
+                    <br>
+                    <span><b>&emsp;&emsp;&ensp; Желтая -</b> Меняет шрифт часов</span>
+                    <br>
+					<span><b>&emsp;&emsp;&ensp; Белая -</b> Выводит время на экран</span>
+                    <br>
+                    <br>
+                    <span>* Выберите кнопку для программирования и нажмите <b>"Сканировать нажатия кнопок"</b></span>
+                    <br>
+                    <span>Нажимайте необходимую кнопку на пульте несколько раз. Значения в таблице будут меняться. Оставьте значение которое появляется чаще.</span>
+                    <br>
+                    <span>Что бы закончить настройку данной кнопки нажмите <b>"Остановить и сохранить"</b></span>
+                    <br>
+                    <span>Аналогичным образом запрограммируйте остальные кнопки.</span>
+                </div>
+                <span class="paragraph">Коды кнопок в системе:</span>
+                <table id="table_line" class="table">
+                    <tr>
+                        <td><span><b>Кнопка</b></span></td>
+                        <td><span><b>Код</b></span></td>
+                    </tr>
+                    <tr>
+                        <td>Красная</td>
+                        <td><span  id="ir_key0" style="text-transform:uppercase">...</span></td>
+                    </tr>
+                    <tr>
+                        <td>Зеленая</td>
+                        <td><span  id="ir_key1" style="text-transform:uppercase">...</span></td>
+                    </tr>
+                    <tr>
+                        <td>Синяя</td>
+                        <td><span  id="ir_key2" style="text-transform:uppercase">...</span></td>
+                    </tr>
+                    <tr>
+                        <td>Желтая</td>
+                        <td><span  id="ir_key3" style="text-transform:uppercase">...</span></td>
+                    </tr>
+					<tr>
+                        <td>Белая</td>
+                        <td><span  id="ir_key4" style="text-transform:uppercase">...</span></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td>Выберите кнопку для программирования:</td>
+                        <td><select id="num_key">
+                            <option value="1">Красная</option>
+                            <option value="2">Зеленая</option>
+                            <option value="3">Синяя</option>
+                            <option value="4">Желтая</option>
+							<option value="5">Белая</option>
+                         </select></td>
+                    </tr>
+                </table>
+                <br>
+                <span class="save_booton" onclick="start_scan(this);">Сканировать нажатия кнопок</span>
+                <br>
+                <span class="save_booton" onclick="stop_scan(this);">Остановить и сохранить</span>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

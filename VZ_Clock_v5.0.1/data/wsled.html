@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/wsled.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройка подсветки</span>
+                </titles>
+				<form id="form" onsubmit="save(event)">
+					<span class="paragraph">Параметры отправки данных:</span>
+					<table class="table">
+						<tr>
+							<td>Выберите режим:</td>
+							<td><select id="mode_WS">
+								<option value="0">Демо</option>
+								<option value="1">Круговая радуга</option>
+								<option value="2">Плывущие цвета</option>
+								<option value="3">Змейка-хамелион</option>
+								<option value="4">Радуга</option>
+								<option value="5">Полиция1</option>
+								<option value="6">Полиция2</option>
+								<option value="7">Мозаика</option>
+								<option value="8">Матрица</option>
+								<option value="9">Стробоскоп</option>
+							 </select></td>
+						</tr>
+					</table>
+				
+				<br>
+                    <br>
+                    <input class="save_booton" type="submit" value="Отправить" /><i id="mess">отправка.....</i>
+                </form>
+			</center>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

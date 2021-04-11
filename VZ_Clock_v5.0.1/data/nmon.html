@@ -1,0 +1,252 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/nmon.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройки narodmon.ru</span>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                <span class="paragraph">Параметры отправки данных:</span>
+                    <table class="table">
+                        <tr>
+                            <td>MAC адрес:</td>
+                            <td><span id="macNmon">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Название: VZ</td>
+                            <td><input type="text" class="inputS" id="nameNmon" maxlength="30"/></td>
+                        </tr>
+                        <tr>
+                            <td>Широта:</td>
+                            <td><input type="text" class="inputS" id="latNmon" maxlength="30"/></td>
+                        </tr>
+                        <tr>
+                            <td>Долгота:</td>
+                            <td><input type="text" class="inputS" id="lonNmon" maxlength="30"/></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <td>Период отправки данных:</td>
+                            <td><select id="periodNmon" name="PERIODNMON">
+                                <option value="1">1 мин.</option>
+                                <option value="2">2 мин.</option>
+                                <option value="3">3 мин.</option>
+                                <option value="4">4 мин.</option>
+                                <option value="5">5 мин.</option>
+                                <option value="10">10 мин.</option>
+                                <option value="15">15 мин.</option>
+                                <option value="20">20 мин.</option>
+                                <option value="20">25 мин.</option>
+                                <option value="30">30 мин.</option>
+                                <option value="40">40 мин.</option>
+                                <option value="50">50 мин.</option>
+                                <option value="60">60 мин.</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b>Канал отправки</b></span></td>
+                            <td><span><b>Данные с датчиков</b></span></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><select id="writeNmon0">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><select id="writeNmon1">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><select id="writeNmon2">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><select id="writeNmon3">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><select id="writeNmon4">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><select id="writeNmon5">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><select id="writeNmon6">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><select id="writeNmon7">
+                                <option value="0">Не отправлять</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Параметры получения данных:</span>
+                    <table id="table_line" class="table">
+                      <tr>
+                          <td>uuid (любое валидное):</td>
+                          <td><input type="text" class="inputS" id="uuid" maxlength="40"/></td>
+                      </tr>
+                      <tr>
+                          <td>API ключ:</td>
+                          <td><input type="password" class="inputS" id="api_key" maxlength="40"/><input type="checkbox" class="togleye"  onclick="sh_nmonApi(this);"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 1:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID0" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 2:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID1" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 3:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID2" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 4:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID3" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 5:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID4" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 6:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID5" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 7:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID6" maxlength="30"/></td>
+                      </tr>
+                      <tr>
+                          <td>NMon 8:</td>
+                          <td><input type="text" class="inputS" id="sensors_ID7" maxlength="30"/></td>
+                      </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>   
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

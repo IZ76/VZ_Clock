@@ -1,0 +1,1940 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=2">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/time.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <div>Настройки Времени</div>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                    <table class="table">
+                        <tr>
+                            <td>Сервер NTP</td>
+                            <td><input type="text" class="inputShort" id="ntpServerName" maxlength="30" pattern="[0-9a-zA-Z. ]{1,20}">
+                        </tr>
+                        <tr>
+                            <td>Часовой пояс</td>
+                            <td><select id="timeZone">
+                                <option value="-12"> (GMT) -12:00 </option>
+                                <option value="-11"> (GMT) -11:00 </option>
+                                <option value="-10"> (GMT) -10:00 </option>
+                                <option value="-9" > (GMT) -09:00 </option>
+                                <option value="-8" > (GMT) -08:00 </option>
+                                <option value="-7" > (GMT) -07:00 </option>
+                                <option value="-6" > (GMT) -06:00 </option>
+                                <option value="-5" > (GMT) -05:00 </option>
+                                <option value="-4" > (GMT) -04:00 </option>
+                                <option value="-3.5" > (GMT) -03:30 </option>
+                                <option value="-3" > (GMT) -03:00 </option>
+                                <option value="-2" > (GMT) -02:00 </option>
+                                <option value="-1" > (GMT) -01:00 </option>
+                                <option value="0"  > (GMT) +00:00 </option>
+                                <option value="1"  > (GMT) +01:00 </option>
+                                <option value="2"  > (GMT) +02:00 </option>
+                                <option value="3"  > (GMT) +03:00 </option>
+                                <option value="3.5"  > (GMT) +03:30 </option>
+                                <option value="4"  > (GMT) +04:00 </option>
+                                <option value="4.5"  > (GMT) +04:30 </option>
+                                <option value="5"  > (GMT) +05:00 </option>
+                                <option value="5.5"  > (GMT) +05:30 </option>
+                                <option value="5.75"  > (GMT) +05:45 </option>
+                                <option value="6"  > (GMT) +06:00 </option>
+                                <option value="6.5"  > (GMT) +06:30 </option>
+                                <option value="7"  > (GMT) +07:00 </option>
+                                <option value="8"  > (GMT) +08:00 </option>
+                                <option value="8.5"  > (GMT) +08:30 </option>
+                                <option value="8.75"  > (GMT) +08:45 </option>
+                                <option value="9"  > (GMT) +09:00 </option>
+                                <option value="9.5"  > (GMT) +09:30 </option>
+                                <option value="10" > (GMT) +10:00 </option>
+                                <option value="10.5" > (GMT) +10:30 </option>
+                                <option value="11" > (GMT) +11:00 </option>
+                                <option value="12" > (GMT) +12:00 </option>
+                                <option value="12.75" > (GMT) +12:45 </option>
+                                <option value="13" > (GMT) +13:00 </option>
+                                <option value="14" > (GMT) +14:00 </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Летнее время</td>
+                            <td><input type="checkbox" id="isDayLightSaving"></td>
+                        </tr>
+                        <tr>
+                            <td>Использовать RTC</td>
+                            <td><input type="checkbox" id="rtcStat"></td>
+                            <span class="switch-btn"></span>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <titles>
+                        <span>Настройка будильника</span></paragraph>
+                    </titles>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b>Часы</b></span></td>
+                            <td><span><b>Минуты</b></span></td>
+                            <td><span><b>Режим</b></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="al_0_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_0_1">
+                                    <option value="0"> 00 </option>
+                                    <option value="1"> 01 </option>
+                                    <option value="2"> 02 </option>
+                                    <option value="3"> 03 </option>
+                                    <option value="4"> 04 </option>
+                                    <option value="5"> 05 </option>
+                                    <option value="6"> 06 </option>
+                                    <option value="7"> 07 </option>    
+                                    <option value="8"> 08 </option>
+                                    <option value="9"> 09 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                    <option value="32"> 32 </option>
+                                    <option value="33"> 33 </option>
+                                    <option value="34"> 34 </option>
+                                    <option value="35"> 35 </option>
+                                    <option value="36"> 36 </option>
+                                    <option value="37"> 37 </option>    
+                                    <option value="38"> 38 </option>
+                                    <option value="39"> 39 </option>
+                                    <option value="40"> 40 </option>
+                                    <option value="41"> 41 </option>
+                                    <option value="42"> 42 </option>
+                                    <option value="43"> 43 </option>
+                                    <option value="44"> 44 </option>
+                                    <option value="45"> 45 </option>
+                                    <option value="46"> 46 </option>
+                                    <option value="47"> 47 </option>    
+                                    <option value="48"> 48 </option>
+                                    <option value="49"> 49 </option>
+                                    <option value="50"> 50 </option>
+                                    <option value="51"> 51 </option>
+                                    <option value="52"> 52 </option>
+                                    <option value="53"> 53 </option>
+                                    <option value="54"> 54 </option>
+                                    <option value="55"> 55 </option>
+                                    <option value="56"> 56 </option>
+                                    <option value="57"> 57 </option>    
+                                    <option value="58"> 58 </option>
+                                    <option value="59"> 59 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_0_2">
+                                    <option value="0">Откл</option>
+                                    <option value="11">Разово</option>
+                                    <option value="8">ПОН-ПЯТ (2-6)</option>
+                                    <option value="9">ПОН-СУБ (2-7)</option>
+                                    <option value="10">СУБ-ВОС (6+1)</option>
+                                    <option value="1">ВОС (1)</option>
+                                    <option value="2">ПОН (2)</option>
+                                    <option value="3">ВТО (3)</option>
+                                    <option value="4">СРЕ (4)</option>
+                                    <option value="5">ЧЕТ (5)</option>
+                                    <option value="6">ПЯТ (6)</option>
+                                    <option value="7">СУБ (7)</option>
+                                    <option value="12">ВСЕГДА</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="al_1_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_1_1">
+                                    <option value="0"> 00 </option>
+                                    <option value="1"> 01 </option>
+                                    <option value="2"> 02 </option>
+                                    <option value="3"> 03 </option>
+                                    <option value="4"> 04 </option>
+                                    <option value="5"> 05 </option>
+                                    <option value="6"> 06 </option>
+                                    <option value="7"> 07 </option>    
+                                    <option value="8"> 08 </option>
+                                    <option value="9"> 09 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                    <option value="32"> 32 </option>
+                                    <option value="33"> 33 </option>
+                                    <option value="34"> 34 </option>
+                                    <option value="35"> 35 </option>
+                                    <option value="36"> 36 </option>
+                                    <option value="37"> 37 </option>    
+                                    <option value="38"> 38 </option>
+                                    <option value="39"> 39 </option>
+                                    <option value="40"> 40 </option>
+                                    <option value="41"> 41 </option>
+                                    <option value="42"> 42 </option>
+                                    <option value="43"> 43 </option>
+                                    <option value="44"> 44 </option>
+                                    <option value="45"> 45 </option>
+                                    <option value="46"> 46 </option>
+                                    <option value="47"> 47 </option>    
+                                    <option value="48"> 48 </option>
+                                    <option value="49"> 49 </option>
+                                    <option value="50"> 50 </option>
+                                    <option value="51"> 51 </option>
+                                    <option value="52"> 52 </option>
+                                    <option value="53"> 53 </option>
+                                    <option value="54"> 54 </option>
+                                    <option value="55"> 55 </option>
+                                    <option value="56"> 56 </option>
+                                    <option value="57"> 57 </option>    
+                                    <option value="58"> 58 </option>
+                                    <option value="59"> 59 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_1_2">
+                                    <option value="0">Откл</option>
+                                    <option value="11">Разово</option>
+                                    <option value="8">ПОН-ПЯТ (2-6)</option>
+                                    <option value="9">ПОН-СУБ (2-7)</option>
+                                    <option value="10">СУБ-ВОС (6+1)</option>
+                                    <option value="1">ВОС (1)</option>
+                                    <option value="2">ПОН (2)</option>
+                                    <option value="3">ВТО (3)</option>
+                                    <option value="4">СРЕ (4)</option>
+                                    <option value="5">ЧЕТ (5)</option>
+                                    <option value="6">ПЯТ (6)</option>
+                                    <option value="7">СУБ (7)</option>
+                                    <option value="12">ВСЕГДА</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="al_2_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_2_1">
+                                    <option value="0"> 00 </option>
+                                    <option value="1"> 01 </option>
+                                    <option value="2"> 02 </option>
+                                    <option value="3"> 03 </option>
+                                    <option value="4"> 04 </option>
+                                    <option value="5"> 05 </option>
+                                    <option value="6"> 06 </option>
+                                    <option value="7"> 07 </option>    
+                                    <option value="8"> 08 </option>
+                                    <option value="9"> 09 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                    <option value="32"> 32 </option>
+                                    <option value="33"> 33 </option>
+                                    <option value="34"> 34 </option>
+                                    <option value="35"> 35 </option>
+                                    <option value="36"> 36 </option>
+                                    <option value="37"> 37 </option>    
+                                    <option value="38"> 38 </option>
+                                    <option value="39"> 39 </option>
+                                    <option value="40"> 40 </option>
+                                    <option value="41"> 41 </option>
+                                    <option value="42"> 42 </option>
+                                    <option value="43"> 43 </option>
+                                    <option value="44"> 44 </option>
+                                    <option value="45"> 45 </option>
+                                    <option value="46"> 46 </option>
+                                    <option value="47"> 47 </option>    
+                                    <option value="48"> 48 </option>
+                                    <option value="49"> 49 </option>
+                                    <option value="50"> 50 </option>
+                                    <option value="51"> 51 </option>
+                                    <option value="52"> 52 </option>
+                                    <option value="53"> 53 </option>
+                                    <option value="54"> 54 </option>
+                                    <option value="55"> 55 </option>
+                                    <option value="56"> 56 </option>
+                                    <option value="57"> 57 </option>    
+                                    <option value="58"> 58 </option>
+                                    <option value="59"> 59 </option>
+                                </select>
+                            </td>
+                           <td>
+                                <select id="al_2_2">
+                                    <option value="0">Откл</option>
+                                    <option value="11">Разово</option>
+                                    <option value="8">ПОН-ПЯТ (2-6)</option>
+                                    <option value="9">ПОН-СУБ (2-7)</option>
+                                    <option value="10">СУБ-ВОС (6+1)</option>
+                                    <option value="1">ВОС (1)</option>
+                                    <option value="2">ПОН (2)</option>
+                                    <option value="3">ВТО (3)</option>
+                                    <option value="4">СРЕ (4)</option>
+                                    <option value="5">ЧЕТ (5)</option>
+                                    <option value="6">ПЯТ (6)</option>
+                                    <option value="7">СУБ (7)</option>
+                                    <option value="12">ВСЕГДА</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="al_3_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_3_1">
+                                    <option value="0"> 00 </option>
+                                    <option value="1"> 01 </option>
+                                    <option value="2"> 02 </option>
+                                    <option value="3"> 03 </option>
+                                    <option value="4"> 04 </option>
+                                    <option value="5"> 05 </option>
+                                    <option value="6"> 06 </option>
+                                    <option value="7"> 07 </option>    
+                                    <option value="8"> 08 </option>
+                                    <option value="9"> 09 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                    <option value="32"> 32 </option>
+                                    <option value="33"> 33 </option>
+                                    <option value="34"> 34 </option>
+                                    <option value="35"> 35 </option>
+                                    <option value="36"> 36 </option>
+                                    <option value="37"> 37 </option>    
+                                    <option value="38"> 38 </option>
+                                    <option value="39"> 39 </option>
+                                    <option value="40"> 40 </option>
+                                    <option value="41"> 41 </option>
+                                    <option value="42"> 42 </option>
+                                    <option value="43"> 43 </option>
+                                    <option value="44"> 44 </option>
+                                    <option value="45"> 45 </option>
+                                    <option value="46"> 46 </option>
+                                    <option value="47"> 47 </option>    
+                                    <option value="48"> 48 </option>
+                                    <option value="49"> 49 </option>
+                                    <option value="50"> 50 </option>
+                                    <option value="51"> 51 </option>
+                                    <option value="52"> 52 </option>
+                                    <option value="53"> 53 </option>
+                                    <option value="54"> 54 </option>
+                                    <option value="55"> 55 </option>
+                                    <option value="56"> 56 </option>
+                                    <option value="57"> 57 </option>    
+                                    <option value="58"> 58 </option>
+                                    <option value="59"> 59 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_3_2">
+                                    <option value="0">Откл</option>
+                                    <option value="11">Разово</option>
+                                    <option value="8">ПОН-ПЯТ (2-6)</option>
+                                    <option value="9">ПОН-СУБ (2-7)</option>
+                                    <option value="10">СУБ-ВОС (6+1)</option>
+                                    <option value="1">ВОС (1)</option>
+                                    <option value="2">ПОН (2)</option>
+                                    <option value="3">ВТО (3)</option>
+                                    <option value="4">СРЕ (4)</option>
+                                    <option value="5">ЧЕТ (5)</option>
+                                    <option value="6">ПЯТ (6)</option>
+                                    <option value="7">СУБ (7)</option>
+                                    <option value="12">ВСЕГДА</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="al_4_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_4_1">
+                                    <option value="0"> 00 </option>
+                                    <option value="1"> 01 </option>
+                                    <option value="2"> 02 </option>
+                                    <option value="3"> 03 </option>
+                                    <option value="4"> 04 </option>
+                                    <option value="5"> 05 </option>
+                                    <option value="6"> 06 </option>
+                                    <option value="7"> 07 </option>    
+                                    <option value="8"> 08 </option>
+                                    <option value="9"> 09 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                    <option value="32"> 32 </option>
+                                    <option value="33"> 33 </option>
+                                    <option value="34"> 34 </option>
+                                    <option value="35"> 35 </option>
+                                    <option value="36"> 36 </option>
+                                    <option value="37"> 37 </option>    
+                                    <option value="38"> 38 </option>
+                                    <option value="39"> 39 </option>
+                                    <option value="40"> 40 </option>
+                                    <option value="41"> 41 </option>
+                                    <option value="42"> 42 </option>
+                                    <option value="43"> 43 </option>
+                                    <option value="44"> 44 </option>
+                                    <option value="45"> 45 </option>
+                                    <option value="46"> 46 </option>
+                                    <option value="47"> 47 </option>    
+                                    <option value="48"> 48 </option>
+                                    <option value="49"> 49 </option>
+                                    <option value="50"> 50 </option>
+                                    <option value="51"> 51 </option>
+                                    <option value="52"> 52 </option>
+                                    <option value="53"> 53 </option>
+                                    <option value="54"> 54 </option>
+                                    <option value="55"> 55 </option>
+                                    <option value="56"> 56 </option>
+                                    <option value="57"> 57 </option>    
+                                    <option value="58"> 58 </option>
+                                    <option value="59"> 59 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="al_4_2">
+                                    <option value="0">Откл</option>
+                                    <option value="11">Разово</option>
+                                    <option value="8">ПОН-ПЯТ (2-6)</option>
+                                    <option value="9">ПОН-СУБ (2-7)</option>
+                                    <option value="10">СУБ-ВОС (6+1)</option>
+                                    <option value="1">ВОС (1)</option>
+                                    <option value="2">ПОН (2)</option>
+                                    <option value="3">ВТО (3)</option>
+                                    <option value="4">СРЕ (4)</option>
+                                    <option value="5">ЧЕТ (5)</option>
+                                    <option value="6">ПЯТ (6)</option>
+                                    <option value="7">СУБ (7)</option>
+                                    <option value="12">ВСЕГДА</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th><input class="but_add" type="button" value="Выключить будильник" onclick="stop_alarm();"/></th>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <titles>
+                        <span>Памятные даты</span></paragraph>
+                    </titles>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b> Число </b></span></td>
+                            <td><span><b> Месяц </b></span></td>
+                            <td><span><b> Сообщение </b></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_0_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_0_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_0_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_1_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_1_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_1_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_2_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_2_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_2_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_3_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_3_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_3_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_4_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_4_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_4_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_5_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_5_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_5_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_6_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_6_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_6_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_7_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_7_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_7_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="md_8_0">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                    <option value="24"> 24 </option>
+                                    <option value="25"> 25 </option>
+                                    <option value="26"> 26 </option>
+                                    <option value="27"> 27 </option>    
+                                    <option value="28"> 28 </option>
+                                    <option value="29"> 29 </option>
+                                    <option value="30"> 30 </option>
+                                    <option value="31"> 31 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="md_8_1">
+                                    <option value="1">января</option>
+                                    <option value="2">февраля</option>
+                                    <option value="3">марта</option>
+                                    <option value="4">апреля</option>
+                                    <option value="5">мая</option>
+                                    <option value="6">июня</option>
+                                    <option value="7">июля</option>    
+                                    <option value="8">августа</option>
+                                    <option value="9">сентября</option>
+                                    <option value="10">октября</option>
+                                    <option value="11">ноября</option>
+                                    <option value="12">декабря</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="md_8_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="table">
+                        <tr>
+                            <td><span>Показывать памятные даты с:</span></td>
+                            <td>
+                                <select id="memory_hour_start">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                            <td><span>до:</span></td>
+                            <td>
+                                <select id="memory_hour_end">
+                                    <option value="0"> 0 </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>    
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="11"> 11 </option>
+                                    <option value="12"> 12 </option>
+                                    <option value="13"> 13 </option>
+                                    <option value="14"> 14 </option>
+                                    <option value="15"> 15 </option>
+                                    <option value="16"> 16 </option>
+                                    <option value="17"> 17 </option>
+                                    <option value="18"> 18 </option>
+                                    <option value="19"> 19 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="21"> 21 </option>
+                                    <option value="22"> 22 </option>
+                                    <option value="23"> 23 </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <titles>
+                        <span>Ежедневные напоминания</span></paragraph>
+                    </titles>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><span><b>Часы</b></span></td>
+                            <td><span><b>Минуты</b></span></td>
+                            <td><span><b>Сообщение</b></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="nc_hour_0">
+                                    <option value="24">--</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>    
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="nc_min_0">
+                                    <option value="60">--</option>
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="nc_mess_0" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="nc_hour_1">
+                                    <option value="24">--</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>    
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="nc_min_1">
+                                    <option value="60">--</option>
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="nc_mess_1" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="nc_hour_2">
+                                    <option value="24">--</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>    
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="nc_min_2">
+                                    <option value="60">--</option>
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="nc_mess_2" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="nc_hour_3">
+                                    <option value="24">--</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>    
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="nc_min_3">
+                                    <option value="60">--</option>
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="nc_mess_3" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="nc_hour_4">
+                                    <option value="24">--</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>    
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="nc_min_4">
+                                    <option value="60">--</option>
+                                    <option value="0">00</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="field form-control" id="nc_mess_4" pattern=".{1,25}">
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <paragraph><span class="opt_cn">Установить время и дату вручную</span></paragraph>
+                <table>
+                    <tr>
+                        <td><span>Время</span></td>
+                        <td><select id="t0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                            <option value="6"> 6 </option>
+                            <option value="7"> 7 </option>    
+                            <option value="8"> 8 </option>
+                            <option value="9"> 9 </option>
+                            <option value="10"> 10 </option>
+                            <option value="11"> 11 </option>
+                            <option value="12"> 12 </option>
+                            <option value="13"> 13 </option>
+                            <option value="14"> 14 </option>
+                            <option value="15"> 15 </option>
+                            <option value="16"> 16 </option>
+                            <option value="17"> 17 </option>
+                            <option value="18"> 18 </option>
+                            <option value="19"> 19 </option>
+                            <option value="20"> 20 </option>
+                            <option value="21"> 21 </option>
+                            <option value="22"> 22 </option>
+                            <option value="23"> 23 </option>
+                        </select></td>
+                        <td><span>:</span></td>
+                        <td><select id="t1">
+                            <option value="00"> 00 </option>
+                            <option value="01"> 01 </option>
+                            <option value="02"> 02 </option>
+                            <option value="03"> 03 </option>
+                            <option value="04"> 04 </option>
+                            <option value="05"> 05 </option>
+                            <option value="06"> 06 </option>
+                            <option value="07"> 07 </option>    
+                            <option value="08"> 08 </option>
+                            <option value="09"> 09 </option>
+                            <option value="10"> 10 </option>
+                            <option value="11"> 11 </option>
+                            <option value="12"> 12 </option>
+                            <option value="13"> 13 </option>
+                            <option value="14"> 14 </option>
+                            <option value="15"> 15 </option>
+                            <option value="16"> 16 </option>
+                            <option value="17"> 17 </option>
+                            <option value="18"> 18 </option>
+                            <option value="19"> 19 </option>
+                            <option value="20"> 20 </option>
+                            <option value="21"> 21 </option>
+                            <option value="22"> 22 </option>
+                            <option value="23"> 23 </option>
+                            <option value="24"> 24 </option>
+                            <option value="25"> 25 </option>
+                            <option value="26"> 26 </option>
+                            <option value="27"> 27 </option>    
+                            <option value="28"> 28 </option>
+                            <option value="29"> 29 </option>
+                            <option value="30"> 30 </option>
+                            <option value="31"> 31 </option>
+                            <option value="32"> 32 </option>
+                            <option value="33"> 33 </option>
+                            <option value="34"> 34 </option>
+                            <option value="35"> 35 </option>
+                            <option value="36"> 36 </option>
+                            <option value="37"> 37 </option>    
+                            <option value="38"> 38 </option>
+                            <option value="39"> 39 </option>
+                            <option value="40"> 40 </option>
+                            <option value="41"> 41 </option>
+                            <option value="42"> 42 </option>
+                            <option value="43"> 43 </option>
+                            <option value="44"> 44 </option>
+                            <option value="45"> 45 </option>
+                            <option value="46"> 46 </option>
+                            <option value="47"> 47 </option>    
+                            <option value="48"> 48 </option>
+                            <option value="49"> 49 </option>
+                            <option value="50"> 50 </option>
+                            <option value="51"> 51 </option>
+                            <option value="52"> 52 </option>
+                            <option value="53"> 53 </option>
+                            <option value="54"> 54 </option>
+                            <option value="55"> 55 </option>
+                            <option value="56"> 56 </option>
+                            <option value="57"> 57 </option>    
+                            <option value="58"> 58 </option>
+                            <option value="59"> 59 </option>
+                        </select></td>
+                        <td><span>Дата</span></td>
+                        <td><select id="d0">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                            <option value="6"> 6 </option>
+                            <option value="7"> 7 </option>    
+                            <option value="8"> 8 </option>
+                            <option value="9"> 9 </option>
+                            <option value="10"> 10 </option>
+                            <option value="11"> 11 </option>
+                            <option value="12"> 12 </option>
+                            <option value="13"> 13 </option>
+                            <option value="14"> 14 </option>
+                            <option value="15"> 15 </option>
+                            <option value="16"> 16 </option>
+                            <option value="17"> 17 </option>
+                            <option value="18"> 18 </option>
+                            <option value="19"> 19 </option>
+                            <option value="20"> 20 </option>
+                            <option value="21"> 21 </option>
+                            <option value="22"> 22 </option>
+                            <option value="23"> 23 </option>
+                            <option value="24"> 24 </option>
+                            <option value="25"> 25 </option>
+                            <option value="26"> 26 </option>
+                            <option value="27"> 27 </option>    
+                            <option value="28"> 28 </option>
+                            <option value="29"> 29 </option>
+                            <option value="30"> 30 </option>
+                            <option value="31"> 31 </option>
+                        </select></td>
+                        <td><span>.</span></td>
+                        <td><select id="d1">
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                            <option value="6"> 6 </option>
+                            <option value="7"> 7 </option>    
+                            <option value="8"> 8 </option>
+                            <option value="9"> 9 </option>
+                            <option value="10"> 10 </option>
+                            <option value="11"> 11 </option>
+                            <option value="12"> 12 </option>
+                        </select></td>
+                        <td><span>.</span></td>
+                        <td><select id="d2">
+                            <option value="2020"> 2020 </option>
+                            <option value="2021"> 2021 </option>
+                            <option value="2022"> 2022 </option>
+                            <option value="2023"> 2023 </option>
+                            <option value="2024"> 2024 </option>
+                            <option value="2025"> 2025 </option>
+                            <option value="2026"> 2026 </option>    
+                            <option value="2027"> 2027 </option>
+                            <option value="2028"> 2028 </option>
+                            <option value="2029"> 2029 </option>
+                            <option value="2030"> 2030 </option>
+                            <option value="2031"> 2031 </option>
+                        </select></td>
+                    <tr>
+                </table>
+                <span class="save_booton" onclick="set_time();">Установить</span>     
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class="right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>
+</html>

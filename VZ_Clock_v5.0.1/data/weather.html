@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/weath.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройки погоды</span>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                    <hr>
+                    <div class="chb">
+                         <span>Получать и выводить погоду на экран</span>
+                         <span>&ensp;&ensp;</span>
+                         <input type="checkbox" id="weathOn" onclick="send_onWeath(this);"/>
+                    </div>
+                    <hr>
+                    <table class="table">
+                        <tr>
+                            <td>Погодный сервер:</td>
+                            <td><select id="weatherHost">
+                                <option value="0"> weatherbit.io </option>
+                                <option value="1"> openweathermap.org </option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>API weatherbit ключ:</td>
+                            <td><input type="password" class="inputS" id="weatherKey0" maxlength="40"/><input type="checkbox" class="togleye"  onclick="sh_weathBitApi(this);"/></td>
+                        </tr>
+                        <tr>
+                            <td>Название города:</td>
+                            <td><input type="text" class="inputS" id="cityID0" maxlength="30"/></td>
+                        </tr>
+                        <tr>
+                            <td>API openweathermap ключ:</td>
+                            <td><input type="password" class="inputS" id="weatherKey1" maxlength="40"/><input type="checkbox" class="togleye"  onclick="sh_weathOpenApi(this);"/></td>
+                        </tr>
+                        <tr>
+                            <td>Название или код города:</td>
+                            <td><input type="text" class="inputS" id="cityID1" maxlength="30"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отображаемое название города:</td>
+                            <td><input type="text" class="inputS" id="personalCityName" maxlength="30"/></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <td>Отображать название города:</td>
+                            <td><input type="checkbox" id="displayCityName"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать прогноз на сейчас:</td>
+                            <td><input type="checkbox" id="displayForecastNow"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать прогноз на сегодня:</td>
+                            <td><input type="checkbox" id="displayForecastToday"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать прогноз на завтра:</td>
+                            <td><input type="checkbox" id="displayForecastTomorrow"/></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать направление ветра:</td>
+                            <td><select id="displayForecastWind">
+                                <option value="0">Стрелками</option>
+                                <option value="1">Словами</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Анимация ошибки прогноза:</td>
+                            <td><input type="checkbox" id="animNotWeather"/></td>
+                        <tr>
+                    </table>
+                    <br>
+                    <table>
+                      <tr>
+                        <td align="right"><span>Показывать погоду с:</span></td>
+                        <td><select id="timeStartViewWeather">
+                            <option value="0"> 0 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                            <option value="6"> 6 </option>
+                            <option value="7"> 7 </option>    
+                            <option value="8"> 8 </option>
+                            <option value="9"> 9 </option>
+                            <option value="10"> 10 </option>
+                            <option value="11"> 11 </option>
+                            <option value="12"> 12 </option>
+                            <option value="13"> 13 </option>
+                            <option value="14"> 14 </option>
+                            <option value="15"> 15 </option>
+                            <option value="16"> 16 </option>
+                            <option value="17"> 17 </option>
+                            <option value="18"> 18 </option>
+                            <option value="19"> 19 </option>
+                            <option value="20"> 20 </option>
+                            <option value="21"> 21 </option>
+                            <option value="22"> 22 </option>
+                            <option value="23"> 23 </option>
+                          </select></td>
+                        <td align="right"><span>до:</span></td>
+                        <td><select id="timeEndViewWeather">
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                            <option value="6"> 6 </option>
+                            <option value="7"> 7 </option>
+                            <option value="8"> 8 </option>
+                            <option value="9"> 9 </option>
+                            <option value="10"> 10 </option>
+                            <option value="11"> 11 </option>
+                            <option value="12"> 12 </option>
+                            <option value="13"> 13 </option>
+                            <option value="14"> 14 </option>
+                            <option value="15"> 15 </option>
+                            <option value="16"> 16 </option>
+                            <option value="17"> 17 </option>
+                            <option value="18"> 18 </option>
+                            <option value="19"> 19 </option>
+                            <option value="20"> 20 </option>
+                            <option value="21"> 21 </option>
+                            <option value="22"> 22 </option>
+                            <option value="23"> 23 </option>
+                            <option value="24"> полуночи </option>
+                        </select></td>
+                      </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Данные сервера</span>
+                    <table id="table_line" class="table">    
+                        <tr>
+                            <td>Время обновления:</td>
+                            <td><span id="location_localtime">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Страна:</td>
+                            <td><span id="location_country">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Регион:</td>
+                            <td><span id="location_region">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Название города:</td>
+                            <td><span id="location_name">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Рассвет:</td>
+                            <td><span id="location_sunrise">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Закат:</td>
+                            <td><span id="location_sunset">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Температура (°C):</td>
+                            <td><span id="location_temp">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ощущается как (°C):</td>
+                            <td><span id="location_app_temp">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Влажность (%):</td>
+                            <td><span id="location_rh">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Давление (мм):</td>
+                            <td><span id="location_pres">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Скорость ветра (м/с):</td>
+                            <td><span id="location_wind_spd">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Направление ветра:</td>
+                            <td><span id="location_wind_cdir_full">---</span></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Облачность (%):</td>
+                            <td><span id="location_clouds">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Видимость (км):</td>
+                            <td><span id="location_vis">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Индекс UV (0-11+):</td>
+                            <td><span id="location_uv">---</span></td>
+                        </tr>
+                        <tr>
+                            <td>Описание погоды:</td>
+                            <td><span id="location_wds">---</span></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

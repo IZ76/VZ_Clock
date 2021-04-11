@@ -1,0 +1,867 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/led.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+            </div>
+            <center>
+                <titles>
+                    <span>Настройки часов</span>
+                </titles>
+                <form id="form" onsubmit="save(event)">
+                    <span class="paragraph">Настройки экрана</span>
+                    <table id="table_line" class="table">
+                        <tr id="000" style="display: none;">
+                            <td></td>
+                            <td><span><b>1-я строка</b></span></td>
+                            <td id="001" style="display: none;"><span><b>2-я строка</b></span></td>
+                        </tr>
+                        <tr>
+                            <td>Версия часов:</td>
+                            <td><select id="NUM_VER_X">
+                                <option value="0">x1</option>
+                                <option value="1">x2</option>
+                            </select></td>
+                            <td id="002" style="display: none;"></td>
+                        </tr>
+                        <tr>
+                            <td>Кол-во модулей:</td>
+                            <td><select id="NUM_MAX0">
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9" id="005">9</option>
+                                <option value="10" id="006">10</option>
+                            </select></td>
+                            <td id="003" style="display: none;"><select id="NUM_MAX1">
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Вращение:</td>
+                            <td><select id="rotate0">
+                                <option value="0">0</option>
+                                <option value="90">90</option>
+                                <option value="180">180</option>
+                                <option value="270">270</option>
+                            </select></td>
+                            <td id="004" style="display: none;"><select id="rotate1">
+                                <option value="0">0</option>
+                                <option value="90">90</option>
+                                <option value="180">180</option>
+                                <option value="270">270</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Зеркально:</td>
+                            <td><input type="checkbox" id="mirror0"/></td>
+                            <td id="014" style="display: none;"><input type="checkbox" id="mirror1"/></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <td>Дневной режим экрана с:</td>
+                            <td><select id="timeDay">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select></td>
+                            <td>до:</td>
+                            <td><select id="timeNight">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">полуночи</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Яркость экрана днём:</td>
+                            <td><select id="volBrightsMax">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select></td>
+                            <td>ночью:</td>
+                            <td><select id="volBrightsMin">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <td><div>Менять яркость:</div><div><span id="lba"></span></div></td>
+                            <td><select id="typeSwitchBrightness">
+                                <option value="0">По времени</option>
+                                <option value="1">Фоторезистор</option>
+                                <option value="2" id="BH" style="display: none;">BH1750</option>
+                                <option value="3" id="MAX" style="display: none;">MAX44009</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Режим часов:</td>
+                            <td><select id="clockAndSec">
+                                <option value="0">Без секунд</option>
+                                <option value="1">С секундами</option>
+                                <option value="2">MaxMode</option>
+                            </select></td>
+                        </tr>
+                        <tr id="MMS" style="display: none;">
+                            <td>Отображать секунды:</td>
+                            <td><select id="maxModeSec">
+                                <option value="3">Случайно</option>
+                                <option value="0">Вверху</option>
+                                <option value="1">По центру</option>
+                                <option value="2">Внизу</option>
+                            </select></td>
+                        </tr> 
+                        <tr>
+                            <td>Шрифт часов:</td>
+                            <td><select id="fontCLOCK">
+                                <option value="0">Широкий низкий</option>
+                                <option value="1">Широкий высокий</option>
+                                <option value="2">Жирный низкий</option>
+                                <option value="3">Жирный высокий</option>
+                                <option value="4">Нормальный низкий</option>
+                                <option value="5">Нормальный высокий</option>
+                                <option value="6">Узкий низкий</option>
+                                <option value="7">Узкий высокий</option>
+                            </select></td>
+                        </tr>
+                        <tr id="109" style="display: none;">
+                            <td>Выравнивание часов:</td>
+                            <td><select id="clockAlig">
+                                <option value="0">По левому краю</option>
+                                <option value="1">По центру</option>
+                                <option value="2">По правому краю</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Высота данных:</td>
+                            <td><select id="fontSizeData">
+                                <option value="0">8 линий</option>
+                                <option value="1">7 линий</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Смещение данных:</td>
+                            <td><select id="dataDown">
+                                <option value="0">Без смещения</option>
+                                <option value="1">Смещение вниз</option>
+                            </select></td>
+                        </tr>
+                        <tr id="110" style="display: none;">
+                            <td>Выравнивание данных:</td>
+                            <td><select id="dataAlig">
+                                <option value="0">По левому краю</option>
+                                <option value="1">По центру</option>
+                                <option value="2">По правому краю</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Смещение текста:</td>
+                            <td><select id="textDown">
+                                <option value="0">Без смещения</option>
+                                <option value="1">Смещение вниз</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Отображать дату:</td>
+                            <td><select id="displayData">
+                                <option value="0">Откл.</option>
+                                <option value="1">Статично</option>
+                                <option value="2">Строкой</option>
+                            </select></td>
+                        </tr>
+                        <tr id="111" style="display: none;">
+                            <td>Анимация точек:</td>
+                            <td><select id="animPoint">
+                                <option value="0">Нет</option>
+                                <option value="1">Простая H</option>
+                                <option value="2">Простая L</option>
+                                <option value="3">MAX H</option>
+                                <option value="4">MAX L</option>
+                                <option value="5">MAX2 H</option>
+                                <option value="6">MAX2 L</option>
+                                <option value="7">Мерцание H</option>
+                                <option value="8">Мерцание L</option>
+                                <option value="9">Вращение H</option>
+                                <option value="10">Вращение L</option>
+                            </select></td>
+                        </tr>
+                        <tr id="112" style="display: none;">
+                            <td>Анимация секунд:</td>
+                            <td><select id="secLine">
+                                <option value="0">Нет</option>
+                                <option value="1">Часы</option>
+                                <option value="2">2 линии</option>
+                                <option value="3">1 линия</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                          <td>Скорость бегущей строки:</td> 
+                          <td><select id="timeScrollSpeed">
+                              <option value="99">1</option>
+                              <option value="95">5</option>
+                              <option value="90">10</option>
+                              <option value="85">15</option>
+                              <option value="80">20</option>
+                              <option value="75">25</option>
+                              <option value="70">30</option>
+                              <option value="65">35</option>
+                              <option value="60">40</option>
+                              <option value="55">45</option>
+                              <option value="50">50</option>
+                              <option value="45">55</option>
+                              <option value="40">60</option>
+                              <option value="35">65</option>
+                              <option value="30">70</option>
+                              <option value="25">75</option>
+                              <option value="20">80</option>
+                              <option value="15">85</option>
+                              <option value="10">90</option>
+                              <option value="5">95</option>
+                              <option value="1">99</option>
+                          </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="table_line" class="table">
+                        <tr>
+                            <td><b>Функция на экране</b></td>
+                            <td><b>Длительность</b></td>
+                            <td><b>Отображение</b></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function00">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period00">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view00">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function01">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period01">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view01">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function02">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period02">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view02">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function03">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period03">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view03">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function04">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period04">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view04">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function05">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period05">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view05">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function06">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period06">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view06">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function07">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period07">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view07">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function08">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period08">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view08">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function09">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period09">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view09">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function10">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period10">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view10">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><select id="function11">
+                              <option value="0">Время</option>
+                              <option value="1">Дата</option>
+                              <option value="2">Погода</option>
+                              <option value="3">D1</option>
+                              <option value="4">D2</option>
+                              <option value="5">D3</option>
+                              <option value="6">D4</option>
+                              <option value="7">D5</option>
+                              <option value="8">D6</option>
+                              <option value="9">D7</option>
+                              <option value="10">D8</option>
+                              <option value="11">rss</option>
+                            </select></td>
+                            <td><select id="period11">
+                              <option value="0">--------</option>
+                              <option value="1">1 секунда</option>
+                              <option value="2">2 секунды</option>
+                              <option value="3">3 секунды</option>
+                              <option value="4">4 секунды</option>
+                              <option value="5">5 секунд</option>
+                              <option value="6">6 секунд</option>
+                              <option value="7">7 секунд</option>
+                              <option value="8">8 секунд</option>
+                              <option value="9">9 секунд</option>
+                              <option value="10">10 секунд</option>
+                              <option value="15">15 секунд</option>
+                              <option value="20">20 секунд</option>
+                              <option value="25">25 секунд</option>
+                              <option value="30">30 секунд</option>
+                              <option value="40">40 секунд</option>
+                              <option value="50">50 секунд</option>
+                              <option value="60">60 секунд</option>
+                            </select></td>
+                            <td><select id="view11">
+                              <option value="0">Всегда</option>
+                              <option value="1">Днем</option>
+                              <option value="2">Ночью</option>
+                              <option value="3">Никогда</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <table>
+                    <tr>
+                        <td>Сообщение бегущей строки:</td>
+                        <td><input type="text" class="inputS" id="text" value="TEST сообщение" placeholder="введите сообщение"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="save_booton" type="button" value="TEST" onclick="send_test();"/></td>   
+                        <td><input class="save_booton" type="button" value="RSS" onclick="send_rss();"/></td>
+                    </tr>
+                </table>
+                <br>
+                <hr>
+                <br>
+            </center>    
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class = "right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>           
+</html>

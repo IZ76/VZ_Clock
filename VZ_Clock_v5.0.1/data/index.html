@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript">
+            load_ver();
+            function send_token(submit){
+                server="/auth.php?auth="+document.getElementById('auth').value;
+                <!--window.open(server);-->
+                window.location.href=server;
+            }
+        </script>
+    </head>
+    <body>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <br>
+            <titles>
+                <span>Авторизация пользователя</span>
+            </titles>
+            <div id="main_unit">
+                <center>
+                    <table>
+                        <tr>
+                            <td align="right"><span>Введите токен</span></td>
+                            <td><input type="text" class="field form-control" id="auth" pattern="[-\w\s#@/]{1,15}" placeholder="токен авторизации"></td>
+                        </tr>
+                    </table>
+                </center>
+                <span class="save_booton" onclick="send_token(this);">Войти</span>
+            </div>
+            <br>
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class="right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>
+</html>

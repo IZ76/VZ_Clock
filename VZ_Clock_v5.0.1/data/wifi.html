@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>Часы информер VZ_Clock (by IvanZah)</title>
+        <link rel="shortcut icon" href="/img/favicon.ico?v=2" />
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <script type="text/javascript" src="/start.js"></script>
+        <script type="text/javascript" src="/wifi.js"></script>
+    </head>
+    <body onload="load();">
+        <div id=cnv style=display:none></div>
+        <central-unit>
+            <div class="header">
+                <span>Часы информер VZ_Clock_v</span>
+                <span id="ver">-.-</span>
+                </span>&ensp;(by IvanZah)</span>
+                <br>
+                <span">Время на устройстве:</span>
+                <span id="time">-:--:--</span>
+            </div>
+            <div class="menu_unit">
+                <span class="ico__text" onclick="get_html('wifi.html');">Wifi</span>
+                <span class="ico__text" onclick="get_html('time.html');">Время</span>
+                <span class="ico__text" onclick="get_html('weather.html');">Погода</span>
+                <span class="ico__text" onclick="get_html('led.html');">Экран</span>
+                <span class="ico__text" onclick="get_html('sens.html');">Настройки</span>
+                
+            </div>
+            <titles>
+                <span>Настройки WIFI</span>
+            </titles>
+            <center>
+                <table class="table_info">
+                    <tr><td><div>Подключенная сеть:</div></td><td><div id="ssid">нет подключения</div></td></tr>
+                    <tr><td><div>№ канала:</div></td><td><div id="ch">0<div></td></tr>
+                    <tr><td><div>Уровень сигнала:</div></td><td><div id="sig">0dB</div></td></tr>
+                    <tr><td><div>MAC адрес:</div></td><td><div id="mac">00:00:00:00:00:00</div></td></tr>
+                    <tr><td><div>IP адрес:</div></td><td><div id="ip">0.0.0.0</div></td></tr>
+                    <tr><td><div>Маска сети:</div></td><td><div id="mask">0.0.0.0</div></td></tr>
+                    <tr><td><div>Шлюз:</div></td><td><div id="gw">0.0.0.0</div></td></tr>
+                </table>
+                <br>
+                <div>
+                    <span class="paragraph">Список избранных сетей</span>
+                    <div id="sSsid">---</div>
+                </div>
+                <span class="paragraph">Поиск сетей...</span>
+                <table class="table">
+                    <tr>
+                        <td>Имя сети:</td>
+                        <td>
+                            <input id="idss" class="inputS" maxlength="63" onclick="ssid_update()" autocomplete="off" placeholder="нажмите ▼ для сканирования"/><input id="toggle" onclick="togle()" value="▼" readonly/>
+                            <div id="ssids"><input class="scanSids" value="Сканирую..." /></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Пароль:</td>
+                        <td><input id="pasw" class="inputS" type="password" maxlength="63" placeholder="введите пароль"/><input type="checkbox" class="togleye"  onclick="sh_pass(this)"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input class="but_add" type="button" value="Добавить в избранное..." onclick="add_net()"/></td>
+                    </tr>
+                </table>
+                <form id="form" onsubmit="save(event)">
+                    <table>
+                        <tr>
+                            <td>Подключаться к скрытым сетям</td>
+                            <td><input type="checkbox" class="checkbox" id="hiddenNetworks" name="switch-btn"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <span class="paragraph">Точка доступа</span>
+                    <table class="table">
+                        <tr>
+                            <td>Имя сети:</b></td>
+                            <td><input id="idap" class="inputS" name="AP_SSID" maxlength="63"></td>
+                        </tr>
+                        <tr>
+                            <td>Пароль:</td>  
+                            <td><input id="pasap" class="inputS" name="AP_PASS" type="password" maxlength="63"/><input type="checkbox" class="togleye"  onclick="sh_passap(this)"/></td>
+                        <tr>
+                    </table>
+                    <br>
+                    <br>
+                    <titles>
+                        <span>Авторизация WEB сервера</span>
+                    </titles>
+                    <table>
+                        <tr>
+                            <td>Использовать авторизацию</td>
+                            <td><input type="checkbox" class="checkbox" id="authOn" name="switch-btn"></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>  
+                            <td>Токен:</td>
+                            <td><input id="auth" class="inputS" name="AUTH" type="password" maxlength="63"/><input type="checkbox" class="togleye"  onclick="sh_auth(this)"/></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input class="save_booton" type="submit" value="Сохранить изменения" /><i id="mess">отправка.....</i>
+                </form>
+                <br>
+                <br>
+                <hr>
+                <br>
+            </center>   
+            <div>
+                <a href="http://forum.amperka.ru/threads/Часы-на-esp-01-nodemcu-max7219-web-интерфейс.12767/">Форум</a>
+                <a href="https://www.youtube.com/channel/UCGkErLs3cwCeTj5mcsObgVA">YouTube</a>
+                <a href="https://play.google.com/store/apps/details?...">Приложение</a>    
+                <a href="https://github.com/IZ76/VZ_Clock" class="right">GitHub</a>
+            </div>
+        </central-unit>
+    </body>
+</html>

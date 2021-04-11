@@ -1,0 +1,294 @@
+  @charset "utf-8";
+  *{
+      margin: 0;
+      padding: 0;
+      outline: none;
+  }
+  html{
+      height: 100%;
+      width: 100%;
+  }
+  body{
+      color: #202020;
+      background: #f7f7f7;
+      height: 100%;
+      width: 100%;
+      font-size: 1em;
+      font-family: PT Serif, sans-serif;
+  }
+  central-unit{
+      background-color: #b2f4fb;
+      box-shadow: 0 12px 15px rgba(0, 0, 0, 0.4);
+      padding: 10px;
+      margin: 10px auto 0 auto;
+      width: 500px;
+      max-width: 100%;
+      display: block;
+  }
+  .text1{
+    color: #00008B;
+  }
+  .paragraph {
+      color: #000019;
+      padding-top: 5px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      display: block;
+      line-height: 140%;
+  }
+  
+  .header {
+      color: #00008B;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: center;
+      line-height: 115%;
+      margin-bottom: 10px;
+  }
+  #ssids{
+      display:none;
+      color:#000;
+      background-color:#eee;
+      border:1px solid #999;
+      position:absolute;
+      margin:0;
+      padding:0;
+      width:calc(100vw - 302px);
+      min-width:18px;
+      max-width:248px
+  }
+  .scanAntena,.scanSecurity,.scanSids{
+      border:none;
+      background-color:#f2f2f2
+  }
+  .scanSids{
+      width:calc(100vw - 348px);
+      max-width:200px;
+      color:#00f;
+      cursor:default
+  }
+  .scanAntena,.scanSecurity{
+      width:20px
+  }
+  .scanSids:hover{
+      background:#ccc
+  }
+  .scanSecurity{
+      font-size:12px;
+      margin-top:5px;
+      color:teal
+  }
+  #toggle,.togleye,.n2{
+      color:#00f;
+      cursor:pointer
+  }
+  #toggle, .togleye{
+      margin-bottom:-1px;
+      margin-left:-20px;
+      width:15px;
+      border:0;
+      font-size:15px
+  }
+  .scanAntena{
+      background-repeat:no-repeat;
+      background-position:1px -4px
+  }
+  @media screen and (max-width:400px){
+      .scanSecurity{display:none}
+      .scanSids{width:calc(100vw - 330px)}
+  }
+  @media screen and (max-width:350px){
+      #toggle,.scanAntena{display:none}
+      .scanSids{width:calc(100vw - 302px)}
+  }
+  .inputS,.inputShort{
+      color:darkblue;
+      max-width:250px;
+      height:25px;
+  }
+  .inputS{
+      width:calc(100vw - 300px);
+      padding-right:18px
+  }
+  .sens_ck td{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  #table_line > * > tr > td  {
+    border: 1px solid #a2a9b1;
+    padding: 0.2em 0.4em;
+    text-align:center;
+    vertical-align:unset;
+  }
+  .table td:first-child,.table_info td:first-child{
+      vertical-align:top;
+      text-align:right;
+      padding-right:20px
+  }
+  .table td:first-child{
+      padding-top:9px;
+  }
+  .table td{
+    padding-top:5px
+  }
+  .table{
+      border-collapse: collapse;
+      display:table;
+  }
+  .dels{
+      color:red;
+      font-family:"Arial Black";
+      font-size:20px;
+      cursor:pointer;
+      margin-left:20px;
+  }
+  #nets{margin:10px 0 0 30px}
+  .net{margin-left:20px}
+  #mess{
+    display:none;
+    color:red;
+    margin-left:120px;
+  }
+  #lba, #111{display:none}
+  .but_add {
+      padding: 5px;
+      margin: 5px -5px 5px 5px;
+      border-radius: 2px;
+      font-size: 1em;
+      font-weight: bold;
+      display:inline-table;
+      line-height: 100%;
+      cursor:pointer;
+      box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.3);
+      z-index: 1005;
+      float: right;
+  }
+  .sSsid{
+    cursor: pointer;
+  }
+  .chb{margin:5px;}
+
+
+  
+  .informer{
+      background-color: #eaeaea;
+      margin: 5px;
+      padding: 1%;
+      border: 1px solid #909090;
+      border-radius: 2px;
+      border-color: #3e3b3b;
+      font-style: italic;
+      text-align: justify;
+      text-indent: 30px;
+      display: block;
+  }
+  #main_unit{text-align: center;}
+  .menu_unit{
+      width: 97%;
+      height: 21px;
+      padding: 5px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      background: #41fdff;
+      border-radius: 4px;
+      border: 2px solid #383838;
+      font-size: 1.2em;
+      font-weight: bold;
+  }
+
+  input[type=text].field, input[type=password].field {
+      padding: 3px;
+      margin: 1px;
+      border: 1px solid #575757;
+      border-radius: 2px;
+  }
+  input:focus[type=text].field{border: 1px solid #03d703}
+  input:invalid[type=text] {
+      border:1px solid red !important;
+  }
+  .save_booton {
+      color: #434343;
+      background-color: #41fdff;
+      padding: 5px;
+      margin: 5px;
+      border-radius: 3px;
+      border: 2px solid #383838;
+      font-size: 1em;
+      font-weight: bold;
+      text-transform: uppercase;
+      display:inline-table;
+      line-height: 100%;
+      cursor:pointer;
+      box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.3);
+      z-index: 1005;
+  }
+  .save_booton:hover {
+      box-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
+  }
+  .ico__text {
+      //margin: 2 10 2 10;
+      //font-size: .9em;
+      color: #434343;
+      display: block;
+      cursor:pointer; 
+  }
+  .ico__text:hover {
+      padding: 2px;
+      margin: -2px;
+      font-size: 1em;
+      border-radius: 2px;
+      box-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
+  }
+  .link__img{
+      text-decoration: none;
+  }
+  .link__text{
+      cursor: pointer;
+      color: #00008b;
+  }
+  .left {float: left}
+  .right {float: right}
+  .center {float: center}
+  .clear {clear: both}
+
+  titles {
+      color: #00008B;
+      padding-bottom: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      display: block;
+  }
+  .paragraph {
+      color: #000019;
+      padding-top: 5px;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      display: block;
+      line-height: 140%;
+  }
+  ::selection {background: green; color: #fff}
+  ::-moz-selection {background: green; color: #fff}
+  select {  
+      height: 22px;
+      padding: 0px 5px 0px;
+      margin-bottom: 2px;
+      margin-top: 0;
+      margin-left: 5px;
+      margin-right: 5px;
+      border-radius: 2px;
+      border: 1px solid #909090;
+  }
+  header, footer {
+      padding: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 470px;
+      max-width: 100%;
+      display: block;
+  }
