@@ -2300,8 +2300,10 @@ void narodmonGet(){
     }
     return;
   }
-  const size_t capacity=JSON_ARRAY_SIZE(2)+JSON_OBJECT_SIZE(1)+2*JSON_OBJECT_SIZE(6)+340; //https://arduinojson.org/v6/assistant/
-  DynamicJsonDocument doc(capacity);
+  Serial.println("line="+line);
+  //const size_t capacity=JSON_ARRAY_SIZE(2)+JSON_OBJECT_SIZE(1)+2*JSON_OBJECT_SIZE(6)+340; //https://arduinojson.org/v6/assistant/
+  //DynamicJsonDocument doc(capacity);
+  DynamicJsonDocument doc(1024);
   deserializeJson(doc, line);
   if(!doc.capacity()){
     if(senss.printCom){
