@@ -80,6 +80,7 @@ void server_init(void){
   server.on("/esp/times.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
+      delay(500);
       String line=server.arg("JS").c_str();
       Serial.println("vz/times.json="+line);
       if(line.endsWith("}")){
