@@ -45,7 +45,7 @@ void server_init(void){
   server.on("/jssids.jsone",[](){server.send(200,"text/json",jsonJssid);});
   server.on("/esp/save.php",HTTP_POST,[](){
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("/wifis.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/wifis.json","w");
@@ -61,7 +61,7 @@ void server_init(void){
     if(server.hasArg("JSSIDS")){
       File file=SPIFFS.open("/jssids.json","w");
       if(file){
-        file.print(server.arg("JSSIDS"));
+        file.print(server.arg("JSSIDS").c_str());
         file.close();
       }
       loadJssids();
@@ -69,7 +69,7 @@ void server_init(void){
     if(server.hasArg("SSIDS")){
       File file=SPIFFS.open("/ssids.json","w");
       if(file){
-        file.print(server.arg("SSIDS"));
+        file.print(server.arg("SSIDS").c_str());
         file.close();
       }
       loadSsids();
@@ -80,7 +80,7 @@ void server_init(void){
   server.on("/esp/times.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/times.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/times.json","w");
@@ -146,7 +146,7 @@ void server_init(void){
   server.on("/esp/weaths.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/weath.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/weaths.json","w");
@@ -237,7 +237,7 @@ void server_init(void){
   server.on("/esp/leds.php",HTTP_POST,[](){
     if(indexs.authOn&&verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/leds.json="+line);
       if(line.endsWith("}")){
         File fileLeds=SPIFFS.open("/leds.json","w");
@@ -298,7 +298,7 @@ void server_init(void){
   server.on("/esp/senss.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/senss.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/senss.json","w");
@@ -347,7 +347,7 @@ void server_init(void){
   server.on("/esp/mqtts.php",HTTP_POST,[](){
     if(indexs.authOn&&verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/mqtts.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/mqtts.json","w");
@@ -366,7 +366,7 @@ void server_init(void){
   server.on("/esp/things.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/things.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/things.json","w");
@@ -409,7 +409,7 @@ void server_init(void){
   server.on("/esp/nmons.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("vz/nmons.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/nmons.json","w");
@@ -436,7 +436,7 @@ void server_init(void){
   server.on("/esp/sgps.php",HTTP_POST,[](){
     if(indexs.authOn && verific()) return;
     if(server.hasArg("JS")){
-      String line=server.arg("JS");
+      String line=server.arg("JS").c_str();
       Serial.println("sgps.json="+line);
       if(line.endsWith("}")){
         File file=SPIFFS.open("/sgps.json","w");
