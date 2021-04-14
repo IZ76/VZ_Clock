@@ -2229,16 +2229,17 @@ void narodmonSend(){
   }
   buf+="\n##\r\n";
   if(!ESPclient.connect("narodmon.ru",8283)){
-    Serial.println("Not connected to narodmon.ru");
+    if(senss.printCom)Serial.println("Not connected to narodmon.ru");
     return;
   } else{
     ESPclient.print(buf);
-    Serial.println("Connected narodmon.ru is OK!");
+    if(senss.printCom)Serial.println("Connected narodmon.ru is OK!");
   }
-  while(ESPclient.available()){
-    yield();
+  if(senss.printCom)Serial.println(buf);
+  for(uint8_t i=0;i<50;i++){
+    if(ESPclient.available())return;
+    delay(100);
   }
-  Serial.println(buf);
 }
 //================================================================================================
 //                                  narodmon.ru
